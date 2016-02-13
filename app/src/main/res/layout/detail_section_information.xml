@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/abc_list_item_padding_horizontal_material">
+
+    <!-- Rating bar -->
+    <FrameLayout
+        android:id="@+id/rating_bar"
+        style="@style/AppTheme.movie.rating.frame">
+
+        <ImageView
+            style="@style/AppTheme.movie.rating.image"
+            android:src="@drawable/ic_star_accent_96dp" />
+
+        <TextView
+            android:id="@+id/textview_rating"
+            style="@style/AppTheme.movie.rating.text"
+            android:text="@string/mock_movie_rating"/>
+    </FrameLayout>
+
+    <!-- Release date -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/detail_content_padding">
+
+        <ImageView
+            style="@style/AppTheme.DetailListItem.LeftIcon"
+            android:id="@+id/icon_release_date"
+            android:src="@drawable/ic_release_date" />
+
+        <TextView
+            android:id="@+id/textview_release_date"
+            android:text="@string/mock_movie_date"
+            android:layout_toRightOf="@id/icon_release_date"
+            style="@style/AppTheme.DetailListItem.PrimaryText"
+            tools:text="YYYY-MM-DD" />
+
+        <TextView
+            style="@style/AppTheme.DetailListItem.SecondaryText"
+            android:layout_toRightOf="@id/icon_release_date"
+            android:layout_below="@id/textview_release_date"
+            android:text="@string/details_release_date_label" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

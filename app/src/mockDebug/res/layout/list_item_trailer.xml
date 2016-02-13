@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:id="@+id/list_item_trailer"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_trailer_play_icon"
+        android:padding="@dimen/abc_action_bar_content_inset_material"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:src="@drawable/ic_action_youtube"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:textAlignment="center"
+        android:gravity="fill_vertical"
+        android:id="@+id/list_item_trailer_name"
+        android:text="Official Trailer 1" />
+
+</LinearLayout>

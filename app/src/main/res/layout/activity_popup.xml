@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="dismiss"
+    tools:context=".Popup">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_xlarge"
+        android:padding="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_xlarge"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:elevation="@dimen/fab_elevation"
+        android:background="@drawable/dialog_background"
+        android:transitionName="@string/transition_popup">
+
+        <co.fabrk.popmovies.widget.BaselineGridTextView
+            android:id="@+id/login_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:text="@string/popup_string"
+            style="@style/DialogText" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/spacing_micro"
+            android:text="Got it chief"
+            android:textAppearance="@style/TextAppearance.DarkButton"
+            android:drawableEnd="@drawable/dribbble_logo"
+            android:drawablePadding="@dimen/spacing_micro"
+            android:onClick="doLogin" />
+
+    </LinearLayout>
+
+</FrameLayout>

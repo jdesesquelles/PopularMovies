@@ -1,0 +1,91 @@
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".discover.DiscoverFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/main_layout"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+        android:id="@+id/main_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:tabGravity="fill" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gridview_movies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:numColumns="2"/>
+
+        <FrameLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primary"
+                android:scaleType="fitCenter"
+                android:id="@+id/empty_image_view"
+                android:src="@drawable/ic_videocam_off_black" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_sync"
+                android:layout_width="@dimen/detail_fragment_image_button_layout_width_size"
+                android:layout_height="@dimen/detail_fragment_image_button_layout_height_size"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_marginRight="@dimen/fab_margin"
+                android:elevation="@dimen/fab_elevation"
+                android:src="@drawable/ic_autorenew_black_24dp"
+                app:layout_anchor="@+id/movie_detail_container"
+                app:layout_anchorGravity="top|end" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/splash_screen_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/accent"
+        android:layout_gravity="top|end"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_movie_black" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim"
+        android:layout_width="@dimen/detail_fragment_image_button_layout_width_size"
+        android:layout_height="@dimen/detail_fragment_image_button_layout_height_size"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:elevation="@dimen/fab_elevation"
+        android:src="@drawable/ic_autorenew_black_24dp"
+        app:layout_anchor="@+id/movie_detail_container"
+        app:layout_anchorGravity="top|end" />
+
+</FrameLayout>

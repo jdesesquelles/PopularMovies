@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:ignore="MergeRootFrame"
+    tools:context=".discover.DiscoverFragment">
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_tab_layout"
+            style="@style/AppTheme.Discover.Tab"
+            app:tabGravity="fill" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <FrameLayout
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Empty list image -->
+                <ImageView
+                    android:id="@+id/empty_image_view"
+                    style="@style/AppTheme.Discover.EmptyImageView"
+                    android:src="@drawable/ic_videocam_off_black" />
+                <!-- Todo : delete Resync Action button -->
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_sync"
+                    android:layout_width="@dimen/detail_fragment_image_button_layout_width_size"
+                    android:layout_height="@dimen/detail_fragment_image_button_layout_height_size"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_marginBottom="@dimen/fab_margin"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:elevation="@dimen/fab_elevation"
+                    android:src="@drawable/ic_autorenew_black_24dp"
+                    app:layout_anchor="@+id/movie_detail_container"
+                    app:layout_anchorGravity="top|end" />
+
+            </FrameLayout>
+
+            <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/gridview_movies"
+                style="@style/AppTheme.Discover.GridView"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Slash screen -->
+    <ImageView
+        android:id="@+id/splash_screen_view"
+        style="@style/AppTheme.Discover.SplashScreen"
+        android:src="@drawable/ic_movie_black" />
+
+    <!-- Todo : delete Action Button -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_anim"
+        android:layout_width="@dimen/detail_fragment_image_button_layout_width_size"
+        android:layout_height="@dimen/detail_fragment_image_button_layout_height_size"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:elevation="@dimen/fab_elevation"
+        android:visibility="gone"
+        android:src="@drawable/ic_autorenew_black_24dp"
+        app:layout_anchor="@+id/movie_detail_container"
+        app:layout_anchorGravity="top|end" />
+
+</FrameLayout>

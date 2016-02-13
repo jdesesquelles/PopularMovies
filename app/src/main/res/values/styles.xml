@@ -1,0 +1,216 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+    </style>
+
+    <!--                   -->
+    <!-- Discover Fragment -->
+    <!--                   -->
+
+    <!-- Discover Fragment - Tab style -->
+    <style name="AppTheme.Discover.Tab" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <!-- Discover Fragment - Empty image view style -->
+    <style name="AppTheme.Discover.EmptyImageView" parent="AppTheme">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- Discover Fragment - Grid view style -->
+    <style name="AppTheme.Discover.GridView" parent="AppTheme">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:numColumns">2</item>
+    </style>
+
+    <!-- Discover Fragment - Splash screen style -->
+    <style name="AppTheme.Discover.SplashScreen" parent="AppTheme">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">top|end</item>
+        <item name="android:background">@color/accent</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!--                   -->
+    <!-- Detail Fragment   -->
+    <!--                   -->
+
+    <!-- Movie details theme. -->
+    <style name="AppTheme.DetailTheme" parent="AppTheme" />
+
+    <style name="AppTheme.ReviewTheme.TranslucentStatusBar" parent="AppTheme.DetailTheme">
+        <!-- Not supported on pre-Lollipop -->
+    </style>
+
+
+    <style name="AppTheme.Movie.Upcontainer" parent="AppTheme">
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+
+    <style name="AppTheme.Movie.UpButton" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="android:layout_width">@dimen/detail_image_button_layout_width_size</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:contentDescription">@string/up</item>
+
+    </style>
+
+
+    <style name="AppTheme.Movie.FavoriteFab" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:layout_height">@dimen/detail_fragment_image_button_layout_height_size
+        </item>
+        <item name="android:layout_width">@dimen/detail_image_button_layout_width_size</item>
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="android:elevation">@dimen/fab_elevation</item>
+    </style>
+
+    <style name="AppTheme.Separator" parent="AppTheme">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/accent</item>
+        <item name="android:layout_margin">@dimen/separator_padding</item>
+    </style>
+
+    <style name="AppTheme.movie.overview" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/abc_list_item_padding_horizontal_material</item>
+        <item name="android:textSize">@dimen/detail_body_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- Detail screen - Movie title -->
+    <style name="AppTheme.movie.title" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:padding">@dimen/abc_action_bar_content_inset_material</item>
+        <item name="android:textSize">@dimen/detail_title_text_size</item>
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <!-- Detail screen - Movie rating -->
+    <style name="AppTheme.movie.rating.frame" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:elevation">@dimen/std_elevation</item>
+        <item name="android:gravity">right</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="AppTheme.movie.rating.image" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center_vertical|right</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="AppTheme.movie.rating.text" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:padding">@dimen/abc_action_bar_content_inset_material</item>
+        <item name="android:textSize">@dimen/detail_rating_text_size</item>
+        <item name="android:textColor">#FFFF0000</item>
+    </style>
+
+    <!-- Thumbnail -->
+
+    <style name="AppTheme.movie.thumbnail" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:elevation">@dimen/std_elevation</item>
+        <item name="android:padding">@dimen/abc_button_padding_horizontal_material</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+
+    <!-- Detail screen - basic info -->
+    <style name="AppTheme.TextView.SecondaryInfo" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:alpha">?android:disabledAlpha</item>
+        <item name="android:paddingLeft">@dimen/detail_content_padding</item>
+        <item name="android:paddingRight">@dimen/detail_content_padding</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="AppTheme.DetailListItem.LeftIcon" parent="AppTheme">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:alpha">?android:disabledAlpha</item>
+    </style>
+
+    <style name="AppTheme.DetailListItem.PrimaryText" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">@dimen/detail_content_padding</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="AppTheme.DetailListItem.SecondaryText" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">@dimen/detail_content_padding</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextAppearance.DarkButton" parent="@android:style/TextAppearance.Material.Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="DialogText">
+        <item name="android:textAppearance">@style/TextAppearance.DialogContent</item>
+    </style>
+
+    <style name="TextAppearance.DialogContent" parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="Popup">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+        <item name="android:colorButtonNormal">@color/accent</item>
+        <item name="android:colorControlHighlight">@color/primary_light</item>
+    </style>
+
+</resources>
