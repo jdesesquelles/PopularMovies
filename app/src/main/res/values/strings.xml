@@ -1,0 +1,87 @@
+<resources>
+    <!-- Transitions -->
+    <string name="transition_thumbnail">transitionThumbnail</string>
+    <string name="transition_popup" translatable="false">transitionPopup</string>
+    <string name="transition_shot" translatable="false">shot</string>
+
+
+
+    <!-- Content Provider -->
+    <string name="content_authority">co.fabrk.popmovies</string>
+
+    <!-- App info -->
+    <!-- TODO: pick up a better name for the app -->
+    <string name="app_name">Popular Movies0</string>
+
+    <!-- Menu -->
+    <string name="action_settings">Settings</string>
+    <string name="sort_most_popular">Most Popular</string>
+    <string name="sort_highest_rated">Highest rated</string>
+
+    <!-- Activity Title -->
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="title_activity_detail">Movie Detail</string>
+    <string name="title_activity_detail_activity2">DetailActivity2</string>
+    <string name="title_activity_trailer_player">TrailerPlayerActivity</string>
+
+    <string name="details_overview_label">Overview</string>
+    <string name="details_release_date_label">Release date</string>
+    <string name="details_genre_label">Genre</string>
+    <string name="details_prod_countries_date_label">Country</string>
+
+
+    <!-- TODO: move from tmdbconstant to Xml File -->
+    <!-- Content Provider -->
+    <string name="api_key"></string>
+    <string name="sort_option_pop">popularity</string>
+    <string name="sort_option_rat">vote_average.desc</string>
+    <string name="url_base">http://api.themoviedb.org/3/discover/movie?</string>
+    <string name="url_sort_param">sort_by</string>
+    <string name="url_api_key_param">api_key</string>
+    <string name="review_content">"Fabulous action movie. Lots of interesting characters. They don't make many movies like this. The whole movie from start to finish was entertaining I'm looking forward to seeing it again. I definitely recommend seeing it."</string>
+    <string name="youtube_api_key"></string>
+
+    <!-- Error message -->
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
+    <!-- User interface message -->
+
+    <string name="database_empty_user_message">Seems like no data in there.</string>
+
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">popmovies.fabrk.co</string>
+    <string name="up">Up</string>
+
+    <!-- mock data -->
+    <string name="mock_movie_title">Supa Movie</string>
+    <string name="mock_movie_date">November 10th, 2015</string>
+    <string name="mock_movie_rating">10</string>
+    <string name="mock_movie_overview">"Fabulous action movie. Lots of interesting characters. They don't make many movies like this. The whole movie from start to finish was entertaining I'm looking forward to seeing it again. I definitely recommend seeing it."</string>
+
+
+    <string name="mock_review_author_1">Marko Movie Lover</string>
+    <string name="mock_review_comment_1">Nice movie overall</string>
+    <string name="mock_review_author_2">John McGroove</string>
+    <string name="mock_review_comment_2">Really like the end</string>
+    <string name="mock_review_author_3">Bertrand Conclave</string>
+    <string name="mock_review_comment_3">Never seen a S**t like that one</string>
+
+    <string name="mock_trailer_name_1">Official Trailer</string>
+    <string name="mock_trailer_url_1">xxx</string>
+    <string name="mock_trailer_name_2">Off Trailer</string>
+    <string name="mock_trailer_url_2">xxx</string>
+    <string name="mock_trailer_name_3">Footage</string>
+    <string name="mock_trailer_url_3">xxx</string>
+    <string name="detail_review_section_title">Reviews</string>
+    <string name="discover_tab_favorite_title">Favorites</string>
+    <string name="detail_trailers_section_title">Trailers</string>
+    <string name="customTextFont">Rosario-Regular.ttf</string>
+
+    <!-- Morpho Popup  -->
+    <string name="popup_string">Morpho Popup</string>
+    <string name="title_activity_popup">Popup</string>
+
+
+
+
+</resources>
