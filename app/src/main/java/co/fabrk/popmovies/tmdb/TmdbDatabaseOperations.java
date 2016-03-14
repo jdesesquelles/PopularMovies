@@ -26,12 +26,9 @@ public class TmdbDatabaseOperations {
     private static boolean DEBUG = true;
     private static final String LOG_TAG = TmdbDatabaseOperations.class.getSimpleName();
 
-    public static Long InsertMovieInDb(TMDBMovie movie, Context context) {
-//        Log.v(LOG_TAG, "inserting " + movie.getId() + " " + movie.getTitle());
-//        Log.e("movieId", "movieId :" + movie.getId());
-
+    public static Long InsertMovieInDb(TMDBMovie movie, ContentResolver contentResolver) {
         // First, check if the movie with this tmdb_id already exists in the db
-        Cursor cursor = context.getContentResolver().query(
+        Cursor cursor = contentResolver.query(
                 TmdbContract.MovieEntry.CONTENT_URI,
                 new String[]{TmdbContract.MovieEntry._ID},
                 TmdbContract.MovieEntry.COLUMN_TMDB_MOVIE_ID + " = ?",
@@ -54,14 +51,14 @@ public class TmdbDatabaseOperations {
             movieValues.put(TmdbContract.MovieEntry.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
             movieValues.put(TmdbContract.MovieEntry.COLUMN_POPULARITY, movie.getPopularity());
             movieValues.put(TmdbContract.MovieEntry.COLUMN_BACKDROP, movie.getBackdrop());
-            Uri movieInsertUri = context.getContentResolver()
+            Uri movieInsertUri = contentResolver
                     .insert(TmdbContract.MovieEntry.CONTENT_URI, movieValues);
             cursor.close();
             return ContentUris.parseId(movieInsertUri);
         }
     }
 
-    public static void addBulkMovies(ArrayList<TMDBMovie> movieArrayList, Context context) {
+    public static void addBulkMovies(ArrayList<TMDBMovie> movieArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(movieArrayList.size());
         for (int i = 0; i  < movieArrayList.size(); i++) {
             ContentValues movieValues = new ContentValues();
@@ -78,31 +75,12 @@ public class TmdbDatabaseOperations {
         if (cVVector.size() > 0) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            int rowsInserted = context.getContentResolver()
+            int rowsInserted = contentResolver
                     .bulkInsert(TmdbContract.MovieEntry.CONTENT_URI, cvArray);
-//            Log.v(LOG_TAG, "inserted " + rowsInserted + " rows of movie");
-//            Log.v(LOG_TAG, "cVVector.size() :" + cVVector.size());
-            //TODO remove DEBUG Mode
-//            if (DEBUG) {
-//                Cursor cursor = context.getContentResolver().query(
-//                        TmdbContract.MovieEntry.CONTENT_URI, null, null, null, null
-//                );
-//                if (cursor.moveToFirst()) {
-//                    ContentValues resultValues = new ContentValues();
-//                    DatabaseUtils.cursorRowToContentValues(cursor, resultValues);
-//                    Log.v(LOG_TAG, "Query succeeded! **********");
-//                    for (String key : resultValues.keySet()) {
-//                        Log.v(LOG_TAG, key + ": " + resultValues.getAsString(key));
-//                    }
-//                } else {
-//                    Log.v(LOG_TAG, "Query failed! :( **********");
-//                }
-//                cursor.close();
-//            }
         }
     }
 
-    public static void addHighestRatedList(ArrayList<TMDBMovie> movieArrayList, Context context) {
+    public static void addHighestRatedList(ArrayList<TMDBMovie> movieArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(movieArrayList.size());
 
         for (int i = 0; i  < movieArrayList.size(); i++) {
@@ -114,12 +92,12 @@ public class TmdbDatabaseOperations {
         if (cVVector.size() > 0) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            int rowsInserted = context.getContentResolver()
+            int rowsInserted = contentResolver
                     .bulkInsert(TmdbContract.HighestRatedEntry.CONTENT_URI, cvArray);
         }
     }
 
-    public static void addPopularList(ArrayList<TMDBMovie> movieArrayList, Context context) {
+    public static void addPopularList(ArrayList<TMDBMovie> movieArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(movieArrayList.size());
 
         for (int i = 0; i  < movieArrayList.size(); i++) {
@@ -131,24 +109,24 @@ public class TmdbDatabaseOperations {
         if (cVVector.size() > 0) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            int rowsInserted = context.getContentResolver()
+            int rowsInserted = contentResolver
                     .bulkInsert(TmdbContract.PopularEntry.CONTENT_URI, cvArray);
         }
     }
 
-    public static void deleteOldData(Context context) {
-        context.getContentResolver().delete(TmdbContract.PopularEntry.CONTENT_URI, null, null);
-        context.getContentResolver().delete(TmdbContract.HighestRatedEntry.CONTENT_URI, null, null);
-        context.getContentResolver().delete(TmdbContract.MovieEntry.CONTENT_URI, null, null);
+    public static void deleteOldData(ContentResolver contentResolver) {
+        contentResolver.delete(TmdbContract.PopularEntry.CONTENT_URI, null, null);
+        contentResolver.delete(TmdbContract.HighestRatedEntry.CONTENT_URI, null, null);
+        contentResolver.delete(TmdbContract.MovieEntry.CONTENT_URI, null, null);
     }
 
-    public static void updateMovieExtraInfo(TMDBMovie movie, Context context) {
-        addBulkTrailers(movie.getId(), movie.getTmdbTrailers(), context);
-        addBulkReviews(movie.getId(), movie.getTmdbReviews(), context);
+    public static void updateMovieExtraInfo(TMDBMovie movie, ContentResolver contentResolver) {
+        addBulkTrailers(movie.getId(), movie.getTmdbTrailers(), contentResolver);
+        addBulkReviews(movie.getId(), movie.getTmdbReviews(), contentResolver);
     }
 
 
-    public static void addBulkTrailers(String movieId, ArrayList<TMDBTrailer> trailerArrayList, Context context) {
+    public static void addBulkTrailers(String movieId, ArrayList<TMDBTrailer> trailerArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(trailerArrayList.size());
         for (int i = 0; i  < trailerArrayList.size(); i++) {
             ContentValues movieValues = new ContentValues();
@@ -163,7 +141,7 @@ public class TmdbDatabaseOperations {
         if (cVVector.size() > 0) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            int rowsInserted = context.getContentResolver()
+            int rowsInserted = contentResolver
                     .bulkInsert(TmdbContract.TrailerEntry.CONTENT_URI, cvArray);
             Log.v(LOG_TAG, "inserted " + rowsInserted + " rows of movie");
             Log.v(LOG_TAG, "cVVector.size() :" + cVVector.size());
@@ -171,7 +149,7 @@ public class TmdbDatabaseOperations {
             //TODO remove DEBUG Mode
 
             if (DEBUG) {
-                Cursor cursor = context.getContentResolver().query(
+                Cursor cursor = contentResolver.query(
                         TmdbContract.TrailerEntry.CONTENT_URI,
                         null,
                         null,
@@ -194,7 +172,7 @@ public class TmdbDatabaseOperations {
         }
     }
 
-    public static void addBulkReviews(String movieId, ArrayList<TMDBReview> reviewArrayList, Context context) {
+    public static void addBulkReviews(String movieId, ArrayList<TMDBReview> reviewArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(reviewArrayList.size());
         for (int i = 0; i  < reviewArrayList.size(); i++) {
             ContentValues movieValues = new ContentValues();
@@ -207,7 +185,7 @@ public class TmdbDatabaseOperations {
         if (cVVector.size() > 0) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            int rowsInserted = context.getContentResolver()
+            int rowsInserted = contentResolver
                     .bulkInsert(TmdbContract.ReviewEntry.CONTENT_URI, cvArray);
             Log.v(LOG_TAG, "inserted " + rowsInserted + " rows of movie");
             Log.v(LOG_TAG, "cVVector.size() :" + cVVector.size());
@@ -215,7 +193,7 @@ public class TmdbDatabaseOperations {
             //TODO remove DEBUG Mode
 
             if (DEBUG) {
-                Cursor cursor = context.getContentResolver().query(
+                Cursor cursor = contentResolver.query(
                         TmdbContract.ReviewEntry.CONTENT_URI,
                         null,
                         null,

@@ -62,14 +62,13 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
 
     // State variable - @save session
     private int mPosition = GridView.INVALID_POSITION;
-    public static final String API_KEY_EXTRA = "api_key";
 
     private void updateMovie() {
         //Most popular
-            FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity(), getString(R.string.api_key));
+            FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTaskPopular.execute(TmdbConstants.POPULAR);
         //Highest Rated
-            FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity(), getString(R.string.api_key));
+            FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
     }
 
@@ -101,17 +100,14 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 startLoader(tab.getPosition());
-
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -208,36 +204,15 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         View rootView = inflater.inflate(R.layout.main_fragment, container, false);
         setViews(rootView);
         // Start Animation
-//        showSplash();
-//        animSplash();
+        showSplash();
+        animSplash();
         showMovieGrid();
         setListeners();
 
         return rootView;
     }
 
-    private void animSplash() {
-        Animation animation2 = AnimationUtils.loadAnimation(getContext(), R.anim.hyperspace_jump);
-        animation2.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
 
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                showMovieGrid();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        splashScreenImageView.startAnimation(animation2);
-
-
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -256,7 +231,7 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         if (id == R.id.action_sort_pop) {
 //            sortOption = "popular";
             sortOption = TmdbConstants.SORT_VALUE_POPULAR;
-            FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity(), getString(R.string.api_key));
+            FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTask.execute(sortOption);
             getLoaderManager().initLoader(POPULAR_MOVIE_LOADER, null, this);
             return true;
@@ -264,7 +239,7 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         if (id == R.id.action_sort_rate) {
 //            sortOption = "highest_rated";
             sortOption = TmdbConstants.SORT_VALUE_HIGHEST_RATED;
-            FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity(), getString(R.string.api_key));
+            FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTask.execute(sortOption);
             getLoaderManager().initLoader(HIGHEST_RATED_MOVIE_LOADER, null, this);
             return true;
@@ -347,14 +322,14 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         }
         mMovieAdapter.swapCursor(cursor);
 
-        // Loading the first ovie in the detail Screen for the two pane UI
-        if ((cursor != null) && cursor.getCount()>0) {
-            Cursor cursorMovie = (Cursor) mMovieAdapter.getItem(0);
-            TMDBMovie movie = new TMDBMovie(cursorMovie);
-            mPosition = 0;
-            ((Callback) getActivity())
-                    .onItemSelected(movie, discoverGridView.getChildAt(0));
-        }
+//        // Loading the first ovie in the detail Screen for the two pane UI
+//        if ((cursor != null) && cursor.getCount()>0) {
+//            Cursor cursorMovie = (Cursor) mMovieAdapter.getItem(0);
+//            TMDBMovie movie = new TMDBMovie(cursorMovie);
+//            mPosition = 0;
+//            ((Callback) getActivity())
+//                    .onItemSelected(movie, discoverGridView.getChildAt(0));
+//        }
     }
 
     @Override
@@ -388,4 +363,28 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         mainLayout.setVisibility(View.GONE);
 //        discoverGridView.setVisibility(View.GONE);
     }
+
+    private void animSplash() {
+        Animation animation2 = AnimationUtils.loadAnimation(getContext(), R.anim.hyperspace_jump);
+        animation2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                showMovieGrid();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        splashScreenImageView.startAnimation(animation2);
+
+
+    }
+
 }

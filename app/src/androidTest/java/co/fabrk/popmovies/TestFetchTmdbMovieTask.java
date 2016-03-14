@@ -78,8 +78,8 @@ public class TestFetchTmdbMovieTask extends AndroidTestCase {
         movieCursor.close();
 //        assertTrue(movieCursor.getCount() + "records in the DB at start", false);
 
-        FetchTmdbMovies fmt = new FetchTmdbMovies(getContext(), Integer.toString(R.string.api_key));
-        TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContext);
+        FetchTmdbMovies fmt = new FetchTmdbMovies(getContext().getContentResolver());
+        TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContext.getContentResolver());
 
         movieCursor = getContext().getContentResolver().query(
                 TmdbContract.MovieEntry.CONTENT_URI,
@@ -188,8 +188,8 @@ public class TestFetchTmdbMovieTask extends AndroidTestCase {
         getContext().getContentResolver().delete(TmdbContract.MovieEntry.CONTENT_URI,
                 null,
                 null);
-        FetchTmdbMovies fmt = new FetchTmdbMovies(getContext(), Integer.toString(R.string.api_key));
-        Long movieId = TmdbDatabaseOperations.InsertMovieInDb(movie1, mContext);
+        FetchTmdbMovies fmt = new FetchTmdbMovies(getContext().getContentResolver());
+        Long movieId = TmdbDatabaseOperations.InsertMovieInDb(movie1, mContext.getContentResolver());
         // does InsertMovieInDb return a valid record ID?
         assertFalse("Error: InsertMovieInDb returned an invalid ID on insert",
                 movieId == -1);
@@ -233,11 +233,11 @@ public class TestFetchTmdbMovieTask extends AndroidTestCase {
             assertFalse("Error: there should be only one record returned from a Movie query",
                     movieCursor.moveToNext());
             // add the location again
-            Long newMovieId = TmdbDatabaseOperations.InsertMovieInDb(movie1, mContext);
+            Long newMovieId = TmdbDatabaseOperations.InsertMovieInDb(movie1, mContext.getContentResolver());
             assertEquals("Error: inserting a movie again should return the same ID",
                     movieId, newMovieId);
         }
-        Long movie2Id = TmdbDatabaseOperations.InsertMovieInDb(movie2, mContext);
+        Long movie2Id = TmdbDatabaseOperations.InsertMovieInDb(movie2, mContext.getContentResolver());
         // does InsertMovieInDb return a valid record ID?
         assertFalse("Error: InsertMovieInDb returned an invalid ID on insert",
                 movie2Id == -1);

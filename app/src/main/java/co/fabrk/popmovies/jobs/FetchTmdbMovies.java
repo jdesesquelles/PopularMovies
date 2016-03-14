@@ -1,5 +1,6 @@
 package co.fabrk.popmovies.jobs;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -17,35 +18,33 @@ import co.fabrk.popmovies.tmdb.TmdbConstants;
  */
 public class FetchTmdbMovies extends AsyncTask<String, Void, ArrayList<TMDBMovie>>  {
 
-    private final Context mContext;
+    private final ContentResolver mContentResolver;
 
-    public FetchTmdbMovies(Context context, String apiKey) {
-        mContext = context;
-//        TmdbConstants.setApiKeyValue(apiKey);
+    public FetchTmdbMovies(ContentResolver contentResolver) {
+        mContentResolver = contentResolver;
         TmdbConstants.setApiKeyValue(BuildConfig.TMDB_API_KEY);
-
     }
 
     @Override
     protected ArrayList<TMDBMovie> doInBackground(String... params) {
         ArrayList<TMDBMovie> movieArrayList;
-//        TmdbDatabaseOperations.deleteOldData(mContext);
+//        TmdbDatabaseOperations.deleteOldData(mContentResolver);
         switch (params[0]) {
             case TmdbConstants.POPULAR:
                 // TODO: uncomment Netowrk connection set for actual devices
-//            if (Utility.isWifiConnectionAvailable(mContext)) {
+//            if (Utility.isWifiConnectionAvailable(mContentResolver)) {
                 movieArrayList = TmdbRequestApi.getPopularMovies();
-                if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContext);
-                    TmdbDatabaseOperations.addPopularList(movieArrayList, mContext);
+                if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContentResolver);
+                    TmdbDatabaseOperations.addPopularList(movieArrayList, mContentResolver);
                 }
 //            }
 //            else movieArrayList=null;
             case TmdbConstants.HIGHEST_RATED:
                 // TODO: uncomment Netowrk connection set for actual devices
-//            if (Utility.isWifiConnectionAvailable(mContext)) {
+//            if (Utility.isWifiConnectionAvailable(mContentResolver)) {
                 movieArrayList = TmdbRequestApi.getHighestRatedMovies();
-                if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContext);
-                    TmdbDatabaseOperations.addHighestRatedList(movieArrayList, mContext);
+                if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContentResolver);
+                    TmdbDatabaseOperations.addHighestRatedList(movieArrayList, mContentResolver);
                 }
 //            }
 //            else movieArrayList=null;

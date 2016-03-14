@@ -1,6 +1,6 @@
 package co.fabrk.popmovies.jobs;
 
-import android.content.Context;
+import android.content.ContentResolver;
 import android.os.AsyncTask;
 
 import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
@@ -15,11 +15,10 @@ import co.fabrk.popmovies.BuildConfig;
 
 public class FetchTmdbDetail extends AsyncTask<TMDBMovie, Void, TMDBMovie> {
 
-    private final Context mContext;
+    private final ContentResolver mContentResolver;
 
-    public FetchTmdbDetail(Context context, String apiKey) {
-        mContext = context;
-//        TmdbConstants.setApiKeyValue(apiKey);
+    public FetchTmdbDetail(ContentResolver contentResolver) {
+        mContentResolver = contentResolver;
         TmdbConstants.setApiKeyValue(BuildConfig.TMDB_API_KEY);
 
     }
@@ -27,7 +26,7 @@ public class FetchTmdbDetail extends AsyncTask<TMDBMovie, Void, TMDBMovie> {
     @Override
     protected TMDBMovie doInBackground(TMDBMovie... movies) {
         TMDBMovie movie = TmdbRequestApi.getExtraInfo(movies[0]);
-        TmdbDatabaseOperations.updateMovieExtraInfo(movie, mContext);
+        TmdbDatabaseOperations.updateMovieExtraInfo(movie, mContentResolver);
         return movie;
     }
 

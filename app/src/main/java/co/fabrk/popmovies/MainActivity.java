@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements DiscoverFragment.
 
     @Override
     public void onItemSelected(TMDBMovie movie, View view) {
-        // In the two pane case, the movie fragment is replace using the fragment manager
+        // In the two pane case, the movie fragment is replaced using the fragment manager
         if (mTwoPane) {
             Bundle args = new Bundle();
             args.putParcelable(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME, movie);

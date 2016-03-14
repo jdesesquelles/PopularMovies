@@ -63,7 +63,7 @@ import co.fabrk.popmovies.transitions.MorphDialogToFab;
 import co.fabrk.popmovies.transitions.MorphFabToDialog;
 import co.fabrk.popmovies.utils.ColorUtils;
 import co.fabrk.popmovies.utils.DateUtils;
-import  co.fabrk.popmovies.utils.AnimUtils;
+import co.fabrk.popmovies.utils.AnimUtils;
 import co.fabrk.popmovies.widget.ParallaxScrimageView;
 
 public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, MovieContract.View {
@@ -86,7 +86,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     // Cursor adapter
     private ReviewCursorAdapter mReviewAdapter;
     private TrailerCursorAdapter mTrailerAdapter;
-
 
 
     public MovieFragment() {
@@ -130,8 +129,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 //        setExitSharedElementCallback(fabLoginSharedElementCallback);
             showMovieDetail(mMovie);
             setListeners();
-        }
-        else {
+        } else {
             showEmptyScreen(); //splashScreenDetailView
         }
         return view;
@@ -284,13 +282,15 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
         if (movie.getTmdbTrailers() != null) {
             showTrailers(movie.getTmdbTrailers());
             viewHolder.includeDetailSectionTrailers.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.includeDetailSectionTrailers.setVisibility(View.GONE);
         }
-        else {viewHolder.includeDetailSectionTrailers.setVisibility(View.GONE);}
         if (movie.getTmdbReviews() != null) {
             showReviews(movie.getTmdbReviews());
             viewHolder.includeDetailSectionReviews.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.includeDetailSectionReviews.setVisibility(View.GONE);
         }
-        else {viewHolder.includeDetailSectionReviews.setVisibility(View.GONE);}
 
         viewHolder.popupLayout.setVisibility(View.GONE);
 
@@ -517,17 +517,28 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        //TODO To be removed
-//        if (cursor.getCount() == 0) {
-//            FetchTmdbDetail fetchTmdbDetail = new FetchTmdbDetail(getContext(), getString(R.string.api_key));
-//            fetchTmdbDetail.execute(mMovie);
-//        }
         switch (loader.getId()) {
             case MOVIE_TRAILERS_LOADER:
+                if (0 == cursor.getCount()) {
+                    Log.e("jerem", "onLoadFinished: Cursor Count = 0");
+                    return;
+                }
+                if (null == mTrailerAdapter) {
+                    Log.e("jerem", "onLoadFinished: TrailerAdapter is null");
+                    return;
+                }
                 mTrailerAdapter.swapCursor(cursor);
                 break;
 
             case MOVIE_REVIEWS_LOADER:
+                if (0 == cursor.getCount()) {
+                    Log.e("jerem", "onLoadFinished: Cursor Count = 0");
+                    return;
+                }
+                if (null == mReviewAdapter) {
+                    Log.e("jerem", "onLoadFinished: ReviewAdapter is null");
+                    return;
+                }
                 mReviewAdapter.swapCursor(cursor);
                 getLoaderManager().initLoader(MOVIE_TRAILERS_LOADER, getArguments(), this);
                 break;
@@ -580,7 +591,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
             parentViewGroup = (ViewGroup) rootView.findViewById(R.id.movie_detail_container);
             movieDetaillinearLayout = (LinearLayout) rootView.findViewById(R.id.movie_detail_container);
             includeDetailSectionTrailers = rootView.findViewById(R.id.include_detail_section_trailers);
-            includeDetailSectionReviews  = rootView.findViewById(R.id.include_detail_section_reviews);
+            includeDetailSectionReviews = rootView.findViewById(R.id.include_detail_section_reviews);
 
             ratingBarLayout = (FrameLayout) rootView.findViewById(R.id.rating_bar);
             titleView = (TextView) rootView.findViewById(R.id.textview_title);
@@ -600,11 +611,10 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
             reviewsTitleTextview = (TextView) rootView.findViewById(R.id.detail_review_textview_title);
             trailersTitleTextview = (TextView) rootView.findViewById(R.id.detail_trailer_textview_title);
             imageView = (ParallaxScrimageView) rootView.findViewById(R.id.shot);
-            popupLayout = (LinearLayout)rootView.findViewById(R.id.container);
+            popupLayout = (LinearLayout) rootView.findViewById(R.id.container);
             detailScrollView = (ScrollView) rootView.findViewById(R.id.detail_scrollview);
         }
     }
-
 
 
     //****************************************************************************//

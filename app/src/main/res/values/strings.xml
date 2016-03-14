@@ -11,7 +11,7 @@
 
     <!-- App info -->
     <!-- TODO: pick up a better name for the app -->
-    <string name="app_name">Popular Movies0</string>
+    <string name="app_name">Popular Movies</string>
 
     <!-- Menu -->
     <string name="action_settings">Settings</string>
@@ -32,15 +32,12 @@
 
     <!-- TODO: move from tmdbconstant to Xml File -->
     <!-- Content Provider -->
-    <!--TODO remove api keys-->
-    <string name="api_key"></string>
     <string name="sort_option_pop">popularity</string>
     <string name="sort_option_rat">vote_average.desc</string>
     <string name="url_base">http://api.themoviedb.org/3/discover/movie?</string>
     <string name="url_sort_param">sort_by</string>
     <string name="url_api_key_param">api_key</string>
     <string name="review_content">"Fabulous action movie. Lots of interesting characters. They don't make many movies like this. The whole movie from start to finish was entertaining I'm looking forward to seeing it again. I definitely recommend seeing it."</string>
-    <string name="youtube_api_key"></string>
 
     <!-- Error message -->
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
