@@ -60,12 +60,6 @@ public class TmdbConstants {
         public static final String PATH_FAVORITES = "favorites";
     }
 
-
-
-
-
-
-
     public static void setApiKeyValue(String apiKey) {
         if (!Objects.equals(API_KEY_VALUE, apiKey)) {
             API_KEY_VALUE = apiKey;

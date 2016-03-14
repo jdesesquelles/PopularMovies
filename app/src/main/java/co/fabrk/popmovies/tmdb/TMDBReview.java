@@ -60,14 +60,6 @@ public class TMDBReview implements Parcelable {
 
     // Getters and Setters
 
-    public String getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
-
     public String getAuthor() {
         return author;
     }

@@ -125,7 +125,6 @@ public class TmdbDatabaseOperations {
         addBulkReviews(movie.getId(), movie.getTmdbReviews(), contentResolver);
     }
 
-
     public static void addBulkTrailers(String movieId, ArrayList<TMDBTrailer> trailerArrayList, ContentResolver contentResolver) {
         Vector<ContentValues> cVVector = new Vector<>(trailerArrayList.size());
         for (int i = 0; i  < trailerArrayList.size(); i++) {
@@ -215,28 +214,6 @@ public class TmdbDatabaseOperations {
             }
         }
     }
-
-//    public static void addToFavorite(TMDBMovie movie, Context context) {
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_TMDB_MOVIE_ID, movie.getId());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_ORIGINAL_TITLE, movie.getTitle());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_POSTER_PATH, movie.getThumbnailPath());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_RELEASE_DATE, movie.getReleaseDate());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_POPULARITY, movie.getPopularity());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_OVERVIEW, movie.getOverview());
-//        contentValues.put(TmdbContract.FavoriteEntry.COLUMN_BACKDROP, movie.getBackdrop());
-//
-//        context.getContentResolver()
-//                .insert(TmdbContract.FavoriteEntry.CONTENT_URI, contentValues);
-//    }
-//
-//    public static void deleteFromFavorite(TMDBMovie movie, Context context) {
-//
-//        context.getContentResolver()
-//                .delete(TmdbContract.MovieEntry.CONTENT_URI, TmdbContract.MovieEntry.COLUMN_TMDB_MOVIE_ID,new String[] { movie.getId()});
-//
-//    }
 
     private static final String TAG = "TmdbDatabaseOperations";
 

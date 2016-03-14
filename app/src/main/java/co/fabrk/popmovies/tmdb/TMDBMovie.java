@@ -154,9 +154,6 @@ public class TMDBMovie implements Parcelable {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
 
     public String getOverview() {
         return overview;
@@ -170,9 +167,6 @@ public class TMDBMovie implements Parcelable {
         return voteAverage;
     }
 
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
-    }
 
     public String getTitle() {
         return title;
@@ -186,7 +180,4 @@ public class TMDBMovie implements Parcelable {
         return BaseUrl + thumbnailPath;
     }
 
-    public void setThumbnailPath(String thumbnailPath) {
-        this.thumbnailPath = thumbnailPath;
-    }
 }
