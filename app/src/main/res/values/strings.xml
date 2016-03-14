@@ -32,6 +32,7 @@
 
     <!-- TODO: move from tmdbconstant to Xml File -->
     <!-- Content Provider -->
+    <!--TODO remove api keys-->
     <string name="api_key"></string>
     <string name="sort_option_pop">popularity</string>
     <string name="sort_option_rat">vote_average.desc</string>

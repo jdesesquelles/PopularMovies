@@ -7,7 +7,7 @@ import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
 import co.fabrk.popmovies.tmdb.TmdbRequestApi;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
-
+import co.fabrk.popmovies.BuildConfig;
 
 /**
  * Created by ebal on 18/08/15.
@@ -19,7 +19,9 @@ public class FetchTmdbDetail extends AsyncTask<TMDBMovie, Void, TMDBMovie> {
 
     public FetchTmdbDetail(Context context, String apiKey) {
         mContext = context;
-        TmdbConstants.setApiKeyValue(apiKey);
+//        TmdbConstants.setApiKeyValue(apiKey);
+        TmdbConstants.setApiKeyValue(BuildConfig.TMDB_API_KEY);
+
     }
 
     @Override

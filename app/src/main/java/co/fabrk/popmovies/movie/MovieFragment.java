@@ -517,10 +517,11 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor.getCount() == 0) {
+        //TODO To be removed
+//        if (cursor.getCount() == 0) {
 //            FetchTmdbDetail fetchTmdbDetail = new FetchTmdbDetail(getContext(), getString(R.string.api_key));
 //            fetchTmdbDetail.execute(mMovie);
-        }
+//        }
         switch (loader.getId()) {
             case MOVIE_TRAILERS_LOADER:
                 mTrailerAdapter.swapCursor(cursor);

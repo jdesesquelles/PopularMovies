@@ -29,6 +29,7 @@ import co.fabrk.popmovies.jobs.FetchTmdbMovies;
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.data.TmdbContract;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
+import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
 
 public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, DiscoverContract.View {

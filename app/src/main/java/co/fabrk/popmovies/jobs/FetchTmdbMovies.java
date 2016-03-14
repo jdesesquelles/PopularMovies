@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
+import co.fabrk.popmovies.BuildConfig;
 import co.fabrk.popmovies.tmdb.TmdbRequestApi;
 import co.fabrk.popmovies.utils.Utility;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
@@ -20,7 +21,9 @@ public class FetchTmdbMovies extends AsyncTask<String, Void, ArrayList<TMDBMovie
 
     public FetchTmdbMovies(Context context, String apiKey) {
         mContext = context;
-        TmdbConstants.setApiKeyValue(apiKey);
+//        TmdbConstants.setApiKeyValue(apiKey);
+        TmdbConstants.setApiKeyValue(BuildConfig.TMDB_API_KEY);
+
     }
 
     @Override
