@@ -1,30 +1,19 @@
 package co.fabrk.popmovies.movie;
 
 import android.app.ActivityOptions;
-import android.app.SharedElementCallback;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.RectF;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 
 import co.fabrk.popmovies.Popup;
 import co.fabrk.popmovies.R;
-import co.fabrk.popmovies.discover.DiscoverFragment;
-import co.fabrk.popmovies.movie.MovieFragment;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
-import co.fabrk.popmovies.transitions.FabDialogMorphSetup;
-import co.fabrk.popmovies.utils.AnimUtils;
+import co.fabrk.popmovies.ui.transitions.FabDialogMorphSetup;
 
 public class MovieActivity extends AppCompatActivity implements MovieFragment.Callback {
 

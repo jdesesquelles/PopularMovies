@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <co.fabrk.popmovies.widget.ParallaxScrimageView
+    <co.fabrk.popmovies.ui.widget.ParallaxScrimageView
         android:id="@+id/shot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:orientation="vertical"
             tools:context=".movie.MovieFragment">
 
-            <co.fabrk.popmovies.widget.ThreeTwoImageView
+            <co.fabrk.popmovies.ui.widget.ThreeTwoImageView
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

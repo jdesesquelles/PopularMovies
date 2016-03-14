@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.data.TmdbContract;
+import co.fabrk.popmovies.ui.utils.CursorAdapter;
 
 /**
  * Created by ebal on 14/09/15.
  */
-public class ReviewCursorAdapter extends co.fabrk.popmovies.utils.CursorAdapter<ReviewCursorAdapter.ReviewItemViewHolder> {
+public class ReviewCursorAdapter extends CursorAdapter<ReviewCursorAdapter.ReviewItemViewHolder> {
 
     private Context mContext;
     private OnItemClickListener onItemClickListener;

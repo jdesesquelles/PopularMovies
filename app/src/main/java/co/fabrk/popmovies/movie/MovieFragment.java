@@ -1,13 +1,9 @@
 package co.fabrk.popmovies.movie;
 
 import android.animation.ValueAnimator;
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.Typeface;
@@ -19,7 +15,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.util.ArrayMap;
@@ -27,16 +22,12 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Palette.Swatch;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.ArcMotion;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,7 +40,6 @@ import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
-import co.fabrk.popmovies.Popup;
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.data.TmdbContract;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
@@ -58,15 +48,14 @@ import co.fabrk.popmovies.tmdb.TMDBTrailer;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
 import co.fabrk.popmovies.tmdb.TmdbProviderUtils;
-import co.fabrk.popmovies.transitions.FabDialogMorphSetup;
-import co.fabrk.popmovies.transitions.MorphDialogToFab;
-import co.fabrk.popmovies.transitions.MorphFabToDialog;
-import co.fabrk.popmovies.utils.ColorUtils;
-import co.fabrk.popmovies.utils.DateUtils;
-import co.fabrk.popmovies.utils.AnimUtils;
-import co.fabrk.popmovies.widget.ParallaxScrimageView;
+import co.fabrk.popmovies.ui.transitions.FabDialogMorphSetup;
+import co.fabrk.popmovies.ui.transitions.MorphDialogToFab;
+import co.fabrk.popmovies.ui.transitions.MorphFabToDialog;
+import co.fabrk.popmovies.ui.utils.ColorUtils;
+import co.fabrk.popmovies.ui.utils.DateUtils;
+import co.fabrk.popmovies.ui.widget.ParallaxScrimageView;
 
-public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, MovieContract.View {
+public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private TMDBMovie mMovie;
     private Uri mUri;
@@ -226,7 +215,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 //        getActivity().startActivityForResult(popUp, 0, options.toBundle());
     }
 
-    @Override
     public void toggleFavorite() {
 
     }
@@ -259,8 +247,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     //                                 Setting the UI                             //
     //****************************************************************************//
 
-    // Contract
-    @Override
+
     public void showMovieDetail(TMDBMovie movie) {
 
         viewHolder.fabFavorite.setVisibility(View.VISIBLE);
@@ -304,7 +291,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     }
 
-    @Override
     public void showTrailers(ArrayList<TMDBTrailer> trailers) {
         if (mTrailerAdapter == null) {
 //            mTrailerAdapter = new TrailerCursorAdapter(getActivity(), trailerCursor, 0);
@@ -317,7 +303,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     }
 
-    @Override
     public void showReviews(ArrayList<TMDBReview> reviews) {
         if (mReviewAdapter == null) {
             mReviewAdapter = new ReviewCursorAdapter(getActivity());

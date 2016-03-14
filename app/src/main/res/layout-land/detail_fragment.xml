@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <co.fabrk.popmovies.widget.ThreeTwoImageView
+                <co.fabrk.popmovies.ui.widget.ThreeTwoImageView
 
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import co.fabrk.popmovies.R;
-import co.fabrk.popmovies.utils.CursorAdapter;
+import co.fabrk.popmovies.ui.utils.CursorAdapter;
 import co.fabrk.popmovies.data.TmdbContract;
 
 /**

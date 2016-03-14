@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import co.fabrk.popmovies.utils.DateUtils;
+import co.fabrk.popmovies.ui.utils.DateUtils;
 
 public class TmdbProvider extends ContentProvider {
 

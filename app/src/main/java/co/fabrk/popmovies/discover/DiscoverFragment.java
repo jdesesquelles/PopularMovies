@@ -32,7 +32,7 @@ import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
 
-public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, DiscoverContract.View {
+public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     View mRootView;
     private static final String TAG = "DiscoverFragment";
@@ -349,7 +349,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     //                                 UI Commands                                //
     //****************************************************************************//
 
-    @Override
     public void showMovieGrid() {
         // Show main_layout
         splashScreenImageView.setVisibility(View.GONE);
@@ -357,7 +356,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         mainLayout.setVisibility(View.VISIBLE);
     }
 
-    @Override
     public void showSplash() {
         splashScreenImageView.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.GONE);

@@ -1,14 +1,13 @@
 package co.fabrk.popmovies.jobs;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
 import co.fabrk.popmovies.BuildConfig;
 import co.fabrk.popmovies.tmdb.TmdbRequestApi;
-import co.fabrk.popmovies.utils.Utility;
+import co.fabrk.popmovies.ui.utils.Utility;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
