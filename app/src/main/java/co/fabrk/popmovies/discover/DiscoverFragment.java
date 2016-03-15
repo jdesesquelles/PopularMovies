@@ -32,11 +32,11 @@ import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
 
-public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     View mRootView;
     private static final String TAG = "DiscoverFragment";
-//    private DiscoverContract.UserActionsListener mActionsListener;
+    //    private DiscoverContract.UserActionsListener mActionsListener;
     private String selectedTabParcelableName = "selectedTab";
     private String currentPositionParcelableName = "currentPosition";
     private String sortOption = TmdbConstants.SORT_VALUE_POPULAR;
@@ -65,11 +65,11 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
 
     private void updateMovie() {
         //Most popular
-            FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
-            movieTaskPopular.execute(TmdbConstants.POPULAR);
+        FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
+        movieTaskPopular.execute(TmdbConstants.POPULAR);
         //Highest Rated
-            FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
-            movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
+        FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
+        movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
     }
 
     //****************************************************************************//
@@ -229,7 +229,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_sort_pop) {
-//            sortOption = "popular";
             sortOption = TmdbConstants.SORT_VALUE_POPULAR;
             FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTask.execute(sortOption);
@@ -237,7 +236,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
             return true;
         }
         if (id == R.id.action_sort_rate) {
-//            sortOption = "highest_rated";
             sortOption = TmdbConstants.SORT_VALUE_HIGHEST_RATED;
             FetchTmdbMovies movieTask = new FetchTmdbMovies(getActivity().getContentResolver());
             movieTask.execute(sortOption);
@@ -245,7 +243,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
             return true;
         }
         if (id == R.id.action_favorite_movie) {
-//            sortOption = "favorite";
             sortOption = TmdbConstants.SORT_VALUE_FAVORITE;
             getLoaderManager().initLoader(FAVORITE_MOVIE_LOADER, null, this);
             return true;
@@ -352,14 +349,13 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     public void showMovieGrid() {
         // Show main_layout
         splashScreenImageView.setVisibility(View.GONE);
-//        discoverGridView.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
     }
 
     public void showSplash() {
+        // Show branded splash screen
         splashScreenImageView.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.GONE);
-//        discoverGridView.setVisibility(View.GONE);
     }
 
     private void animSplash() {
@@ -381,8 +377,5 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
             }
         });
         splashScreenImageView.startAnimation(animation2);
-
-
     }
-
 }
