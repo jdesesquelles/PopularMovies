@@ -124,34 +124,8 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
         return view;
     }
 
-    private void showEmptyScreen() {
-        viewHolder.fabFavorite.setVisibility(View.GONE);
-        viewHolder.popupLayout.setVisibility(View.GONE);
-        viewHolder.detailScrollView.setVisibility(View.GONE);
-        viewHolder.imageView.setVisibility(View.GONE);
-        viewHolder.splashScreenDetailView.setVisibility(View.VISIBLE);
-    }
-
-    private SharedElementCallback fabLoginSharedElementCallback = new SharedElementCallback() {
-        @Override
-        public Parcelable onCaptureSharedElementSnapshot(View sharedElement,
-                                                         Matrix viewToGlobalMatrix,
-                                                         RectF screenBounds) {
-            // store a snapshot of the fab to fade out when morphing to the login dialog
-            int bitmapWidth = Math.round(screenBounds.width());
-            int bitmapHeight = Math.round(screenBounds.height());
-            Bitmap bitmap = null;
-            if (bitmapWidth > 0 && bitmapHeight > 0) {
-                bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
-                sharedElement.draw(new Canvas(bitmap));
-            }
-            return bitmap;
-        }
-    };
-
 
     // Listeners
-    // Todo converto to Rx programming using Rx Android
     private void setListeners() {
         final FloatingActionButton fab = viewHolder.fabFavorite;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -215,9 +189,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 //        getActivity().startActivityForResult(popUp, 0, options.toBundle());
     }
 
-    public void toggleFavorite() {
-
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -247,6 +218,30 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     //                                 Setting the UI                             //
     //****************************************************************************//
 
+    private void showEmptyScreen() {
+        viewHolder.fabFavorite.setVisibility(View.GONE);
+        viewHolder.popupLayout.setVisibility(View.GONE);
+        viewHolder.detailScrollView.setVisibility(View.GONE);
+        viewHolder.imageView.setVisibility(View.GONE);
+        viewHolder.splashScreenDetailView.setVisibility(View.VISIBLE);
+    }
+
+    private SharedElementCallback fabLoginSharedElementCallback = new SharedElementCallback() {
+        @Override
+        public Parcelable onCaptureSharedElementSnapshot(View sharedElement,
+                                                         Matrix viewToGlobalMatrix,
+                                                         RectF screenBounds) {
+            // store a snapshot of the fab to fade out when morphing to the login dialog
+            int bitmapWidth = Math.round(screenBounds.width());
+            int bitmapHeight = Math.round(screenBounds.height());
+            Bitmap bitmap = null;
+            if (bitmapWidth > 0 && bitmapHeight > 0) {
+                bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
+                sharedElement.draw(new Canvas(bitmap));
+            }
+            return bitmap;
+        }
+    };
 
     public void showMovieDetail(TMDBMovie movie) {
 
@@ -457,12 +452,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     private void applyColorAccent(View view, String property, int duration, int titleStartDelay, int currentAccent, int colorAccent) {
         ColorUtils.animateObjectViewColor(duration, titleStartDelay, view, property, currentAccent, colorAccent).start();
-    }
-
-    private void applyColorAccent(ArrayList<View> viewArrayList, String property, int duration, int titleStartDelay, int currentAccent, int colorAccent) {
-        for (View view : viewArrayList) {
-            ColorUtils.animateObjectViewColor(duration, titleStartDelay, view, property, currentAccent, colorAccent).start();
-        }
     }
 
 
