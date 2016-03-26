@@ -1,24 +1,26 @@
-# Popular Movies
+Popular Movies
+==============
+
 ![Alt text](screenshot.png?raw=true "Popular Movies List view")
 ![Alt text](screenshot2.png?raw=true "Popular Movies Detail Screen")
-## Installation Instructions
+
+Installation Instructions
+-------------------------
 For the application to build properly, you will need an API key from themoviedb.org.
 * Create an account at https://www.themoviedb.org/account/signup
 * Get the API key and fill the gradle.properties TMDB_API_KEY=""
 
-From the command Line
+From the command Line:
 
-`git clone https://github.com/jdesesquelles/PopularMovies`
+&nbsp;&nbsp;`git clone https://github.com/jdesesquelles/PopularMovies`
+  &nbsp;&nbsp;`cd PopularMovies`
+&nbsp;&nbsp;`export ANDROID_HOME=/Users/ebal/Library/Android/sdk`
 
-`cd PopularMovies`
+&nbsp;&nbsp;`read API_KEY`
 
-`export ANDROID_HOME=/Users/ebal/Library/Android/sdk`
+&nbsp;&nbsp;`echo "TMDB_API_KEY=\"$API_KEY\"" >> gradle.properties`
 
-`read API_KEY`
-
-`echo "TMDB_API_KEY=\"$API_KEY\"" >> gradle.properties`
-
-`./gradlew installProdDebug`
+&nbsp;&nbsp;`./gradlew installProdDebug`
 
 ## Requirements
 
