@@ -1,6 +1,22 @@
 Popular Movies
 ==============
 <p align="center">
+<div class="embeddedVideo">
+    <object classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B'
+        width="600" height="400"
+        codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
+        <param name='src' value="assets/videos/movie.mov">
+        <param name='autoplay' value="false">
+        <param name='controller' value="true">
+        <param name='loop' value="false">
+
+        <embed src="demo.mov" width="600" height="400"
+        scale="tofit" autoplay="false"
+        controller="true" loop="false" bgcolor="#000000"
+        pluginspage='http://www.apple.com/quicktime/download/'>
+        </embed>
+    </object>
+</div>
 <table border="0">
     <th border="0">
         <img src="screenshot.png" width="120" height="200" />
@@ -21,8 +37,7 @@ Installation Instructions
 An API key from themoviedb.org is required in gradle.properties to build the app
 <ul>
 <li>Create an <A href=https://www.themoviedb.org/account/signup>account</A>
-<li>In the root directory, create the gradle.properties file
-<li>Set TMDB_API_KEY="your API Key" in gradle.properties
+<li>Set TMDB_API_KEY="your API Key" in the gradle.properties file
 </ul>
 
 Building from the command Line
