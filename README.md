@@ -1,6 +1,7 @@
 Popular Movies
 ==============
-<table border="0" align="center">
+<p align="center">
+<table border="0">
     <th border="0">
         <img src="screenshot.png" width="120" height="200" />
         <img src="screenshot2.png" width="120" height="200" />
@@ -12,7 +13,7 @@ Popular Movies
         <br><br>
         <li> Favorite your preferred movies
     </th>
-</table>
+</table> </p>
 
 
 Installation Instructions
