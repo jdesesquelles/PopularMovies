@@ -1,6 +1,6 @@
 Popular Movies
 ==============
-<table border="0">
+<table border="0" align="center">
     <th border="0">
         <img src="screenshot.png" width="120" height="200" />
         <img src="screenshot2.png" width="120" height="200" />
