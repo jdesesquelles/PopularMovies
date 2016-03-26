@@ -1,12 +1,18 @@
 Popular Movies
 ==============
+<table>
+    <th>
 <img src="screenshot.png" width="120" height="200" />
-<img src="screenshot.png" width="240" height="400" />
-<img src="screenshot.png" width="180" height="300" />
+<img src="screenshot2.png" width="120" height="200" />
+</th>
+<th>
+Features
+<li> Browse popular movies
+<li> View movies information
+<li> Build you list of favorite movies
+</th>
+</table>
 
-
-![Alt text](screenshot.png?raw=true "Popular Movies List view")
-![Alt text](screenshot2.png?raw=true "Popular Movies Detail Screen")
 
 Installation Instructions
 -------------------------
