@@ -1,6 +1,10 @@
 Popular Movies
 ==============
-<img src="screenshot.png" width="200" height="400" />
+<img src="screenshot.png" width="120" height="200" />
+<img src="screenshot.png" width="240" height="400" />
+<img src="screenshot.png" width="180" height="300" />
+
+
 ![Alt text](screenshot.png?raw=true "Popular Movies List view")
 ![Alt text](screenshot2.png?raw=true "Popular Movies Detail Screen")
 
