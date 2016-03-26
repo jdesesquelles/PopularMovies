@@ -9,11 +9,11 @@ From the command Line
 `git clone https://github.com/jdesesquelles/PopularMovies`
 `cd PopularMovies`
 `export ANDROID_HOME=/Users/ebal/Library/Android/sdk`
-`read API_KEY
+`read API_KEY`
 `echo "TMDB_API_KEY=\"$API_KEY\"" >> gradle.properties`
 `./gradlew installProdDebug`
 ## Requirements
 _minSdkVersion = 21_
 **targetSdkVersion** = 23
 _compileSdkVersion_ = 23
-_buildToolsVersion_ = '23.0.2'
+_buildToolsVersion_ = '23.0.2'  
