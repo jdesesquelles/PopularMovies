@@ -13,8 +13,10 @@ For the application to build properly, you will need an API key from themoviedb.
 From the command Line:
 
 &nbsp;&nbsp;`git clone https://github.com/jdesesquelles/PopularMovies`
-  &nbsp;&nbsp;`cd PopularMovies`
-&nbsp;&nbsp;`export ANDROID_HOME=/Users/ebal/Library/Android/sdk`
+
+&nbsp;&nbsp;`cd PopularMovies`
+
+&nbsp;&nbsp;`export ANDROID_HOME=~/Library/Android/sdk`
 
 &nbsp;&nbsp;`read API_KEY`
 
@@ -24,10 +26,10 @@ From the command Line:
 
 ## Requirements
 
-_minSdkVersion = 21_
+* minSdkVersion 21
 
-**targetSdkVersion** = 23
+* targetSdkVersion 23
 
-_compileSdkVersion_ = 23
+* compileSdkVersion 23
 
-_buildToolsVersion_ = '23.0.2'
+* buildToolsVersion 23.0.2
