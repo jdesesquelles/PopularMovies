@@ -1,5 +1,5 @@
 # Popular Movies
-![Alt text](screenshot.png=1000?raw=true "Popular Movies List view")
+![Alt text](screenshot.png?raw=true "Popular Movies List view")
 ![Alt text](screenshot2.png?raw=true "Popular Movies Detail Screen")
 ## Installation Instructions
 For the application to build properly, you need an API key from themoviedb.org
