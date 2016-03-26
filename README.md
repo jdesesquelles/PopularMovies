@@ -1,6 +1,6 @@
 Popular Movies
 ==============
-
+<img src="screenshot.png" width="200" height="400" />
 ![Alt text](screenshot.png?raw=true "Popular Movies List view")
 ![Alt text](screenshot2.png?raw=true "Popular Movies Detail Screen")
 
@@ -16,7 +16,7 @@ From the command Line:
 
 &nbsp;&nbsp;`cd PopularMovies`
 
-&nbsp;&nbsp;`export ANDROID_HOME=~/Library/Android/sdk`
+&nbsp;&nbsp;`export ANDROID_HOME=/Library/Android/sdk`
 
 &nbsp;&nbsp;`read API_KEY`
 
