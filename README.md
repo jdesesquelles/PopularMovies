@@ -1,22 +1,5 @@
 Popular Movies
 ==============
-<p align="center">
-<div class="embeddedVideo">
-    <object classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B'
-        width="600" height="400"
-        codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-        <param name='src' value="assets/videos/movie.mov">
-        <param name='autoplay' value="false">
-        <param name='controller' value="true">
-        <param name='loop' value="false">
-
-        <embed src="demo.mov" width="600" height="400"
-        scale="tofit" autoplay="false"
-        controller="true" loop="false" bgcolor="#000000"
-        pluginspage='http://www.apple.com/quicktime/download/'>
-        </embed>
-    </object>
-</div>
 <table border="0">
     <th border="0">
         <img src="screenshot.png" width="120" height="200" />
@@ -32,23 +15,19 @@ Popular Movies
 </table> </p>
 
 
-Installation Instructions
+Build and Install
 -------------------------
 An API key from themoviedb.org is required in gradle.properties to build the app
 <ul>
-<li>Create an <A href=https://www.themoviedb.org/account/signup>account</A>
-<li>Set TMDB_API_KEY="your API Key" in the gradle.properties file
-</ul>
-
-Building from the command Line
-------------------------------
-<ul>
-<code>git clone https://github.com/jdesesquelles/PopularMovies</code><br/>
-<code>cd PopularMovies</code><br/>
-<code>export ANDROID_HOME=/Library/Android/sdk</code><br/>
-<code>read API_KEY</code><br/>
-<code>echo "TMDB_API_KEY=\"$API_KEY\"" >> gradle.properties</code><br/>
-<code>./gradlew installProdDebug</code><br/>
+<li>Create an <A href=https://www.themoviedb.org/account/signup>account</A></li>
+<li>From the command line:</li>
+<br/>
+&nbsp;&nbsp;&nbsp;<code margin-left="40px">git clone https://github.com/jdesesquelles/PopularMovies</code><br/>
+&nbsp;&nbsp;&nbsp;<code>cd PopularMovies</code><br/>
+&nbsp;&nbsp;&nbsp;<code>export ANDROID_HOME=$HOME/Library/Android/sdk</code><br/>
+&nbsp;&nbsp;&nbsp;<code>read API_KEY</code><br/>
+&nbsp;&nbsp;&nbsp;<code>echo "TMDB_API_KEY=\"$API_KEY\"" >> gradle.properties</code><br/>
+&nbsp;&nbsp;&nbsp;<code>./gradlew installProdDebug</code><br/>
 </ul>
 
 Requirements
