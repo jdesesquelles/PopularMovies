@@ -206,7 +206,7 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         // Start Animation
         showSplash();
         animSplash();
-        showMovieGrid();
+//        showMovieGrid();
         setListeners();
 
         return rootView;
