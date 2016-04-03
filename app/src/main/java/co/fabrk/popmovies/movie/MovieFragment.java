@@ -34,12 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.support.v4.app.SharedElementCallback;
-
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
 import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.fabrk.popmovies.R;
@@ -50,9 +47,6 @@ import co.fabrk.popmovies.tmdb.TMDBTrailer;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
 import co.fabrk.popmovies.tmdb.TmdbProviderUtils;
-import co.fabrk.popmovies.ui.transitions.FabDialogMorphSetup;
-import co.fabrk.popmovies.ui.transitions.MorphDialogToFab;
-import co.fabrk.popmovies.ui.transitions.MorphFabToDialog;
 import co.fabrk.popmovies.ui.utils.ColorUtils;
 import co.fabrk.popmovies.ui.utils.DateUtils;
 import co.fabrk.popmovies.ui.widget.ParallaxScrimageView;
@@ -204,7 +198,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     }
 
     public void toggleFavorite(FloatingActionButton fb) {
-        final FloatingActionButton fab = fb;
         if (TmdbProviderUtils.isFavoriteMovie(mMovie, getContext())) {
             TmdbDatabaseOperations.deleteFromFavorite(mMovie.getId(), getContext().getContentResolver());
             fb.setImageDrawable(getActivity().getDrawable(R.drawable.ic_favorite_outline_24dp));
@@ -216,43 +209,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
             Snackbar.make(getView(), "Movie added to favorite", Snackbar.LENGTH_LONG)
                     .setAction("Added to favorite", null).show();
         }
-        // Launching by calling back the MovieActivity
-//            ((Callback) getActivity())
-//                    .onItemSelected(mMovie, fab);
-//        viewHolder.popupLayout.setVisibility(View.GONE);
-//        //
-//
-//        ArcMotion arcMotion = new ArcMotion();
-//        arcMotion.setMinimumHorizontalAngle(50f);
-//        arcMotion.setMinimumVerticalAngle(50f);
-//        int color = ((Swatch) mapSwatch.get("DarkMuted")).getRgb();
-//        Interpolator easeInOut =
-//                AnimationUtils.loadInterpolator(getActivity(), android.R.interpolator.fast_out_slow_in);
-//        MorphFabToDialog sharedEnter =
-//                new MorphFabToDialog(color, dialogCornerRadius, startCornerRadius);
-//
-//
-//        sharedEnter.setPathMotion(arcMotion);
-//        sharedEnter.setInterpolator(easeInOut);
-//        MorphDialogToFab sharedReturn = new MorphDialogToFab(color, startCornerRadius);
-//        sharedReturn.setPathMotion(arcMotion);
-//        sharedReturn.setInterpolator(easeInOut);
-//        if (target != null) {
-//            sharedEnter.addTarget(fab);
-//            sharedReturn.addTarget(target);
-//        }
-//        activity.getWindow().setSharedElementEnterTransition(sharedEnter);
-//        activity.getWindow().setSharedElementReturnTransition(sharedReturn);
-//
-//
-//
-//        // Launching from the fragment directly
-//        Intent popUp = new Intent(getActivity(), Popup.class);
-//        popUp.putExtra(FabDialogMorphSetup.EXTRA_SHARED_ELEMENT_START_COLOR,
-//                ContextCompat.getColor(getActivity(), R.color.accent));
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
-//                (getActivity(), fab, getString(R.string.transition_popup));
-//        getActivity().startActivityForResult(popUp, 0, options.toBundle());
     }
 
 
