@@ -40,6 +40,8 @@ import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.data.TmdbContract;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
@@ -75,6 +77,53 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     // Cursor adapter
     private ReviewCursorAdapter mReviewAdapter;
     private TrailerCursorAdapter mTrailerAdapter;
+
+    @Bind(R.id.movie_detail_container)
+    ViewGroup parentViewGroup;
+    //        LinearLayout movieDetaillinearLayout;
+    @Bind(R.id.layout_detail_information)
+    LinearLayout detailInformationlinearLayout;
+    @Bind(R.id.container)
+    LinearLayout popupLayout;
+    @Bind(R.id.shot)
+    ParallaxScrimageView imageView;
+    @Bind(R.id.detail_scrollview)
+    ScrollView detailScrollView;
+    @Bind(R.id.rating_bar)
+    FrameLayout ratingBarLayout;
+    View rootView;
+    @Bind(R.id.textview_title)
+    TextView titleView;
+    @Bind(R.id.imageview_poster_detail_fragment)
+    ImageView posterView;
+    @Bind(R.id.backdrop)
+    ImageView backdropView;
+    @Bind(R.id.textview_release_date)
+    TextView dateView;
+    @Bind(R.id.textview_rating)
+    TextView ratingView;
+    @Bind(R.id.textview_overview)
+    TextView overviewView;
+    @Bind(R.id.detail_trailer_recycler_view)
+    RecyclerView trailerList;
+    @Bind(R.id.detail_review_recycler_view)
+    RecyclerView reviewList;
+    @Bind(R.id.fab_favorite)
+    FloatingActionButton fabFavorite;
+    @Bind(R.id.separator_reviews)
+    View separatorReviews;
+    @Bind(R.id.separator_trailers)
+    View separatorTrailers;
+    @Bind(R.id.detail_review_textview_title)
+    TextView reviewsTitleTextview;
+    @Bind(R.id.detail_trailer_textview_title)
+    TextView trailersTitleTextview;
+    @Bind(R.id.splash_screen_detail_view)
+    ImageView splashScreenDetailView;
+    @Bind(R.id.include_detail_section_trailers)
+    View includeDetailSectionTrailers;
+    @Bind(R.id.include_detail_section_reviews)
+    View includeDetailSectionReviews;
 
 
     public MovieFragment() {
@@ -112,6 +161,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
         View view;
         view = inflater.inflate(R.layout.detail_fragment, container, false);
+        ButterKnife.bind(this, view);
         viewHolder = new ViewHolder(view);
         Bundle arguments = getArguments();
         if (mMovie != null) {
@@ -352,10 +402,10 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     private void animator() {
         int animationDuration = 500;
         int animationStartDelay = animationDuration / 3;
-        viewHolder.detailInformationlinearLayout.setBackground(null);
-        viewHolder.overviewView.setBackground(null);
-        viewHolder.trailerList.setBackground(null);
-        viewHolder.reviewList.setBackground(null);
+        detailInformationlinearLayout.setBackground(null);
+        overviewView.setBackground(null);
+        trailerList.setBackground(null);
+        reviewList.setBackground(null);
         animateColorTransition(animationDuration, animationStartDelay);
     }
 
@@ -527,68 +577,90 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     //                                 View Holder                                //
     //****************************************************************************//
 
-    public class ViewHolder {
-
-        //TODO: StreamLine
-        private ViewGroup parentViewGroup;
-        private LinearLayout movieDetaillinearLayout;
-        private LinearLayout detailInformationlinearLayout;
-        private LinearLayout popupLayout;
-        private ParallaxScrimageView imageView;
-        private ScrollView detailScrollView;
-        private FrameLayout ratingBarLayout;
-        private View rootView;
-        private TextView titleView;
-        private ImageView posterView;
-        private ImageView backdropView;
-        private TextView dateView;
-        private TextView ratingView;
-        private TextView overviewView;
-        private RecyclerView trailerList;
-        private RecyclerView reviewList;
-        private FloatingActionButton fabFavorite;
-        private View separatorReviews;
-        private View separatorTrailers;
-        private TextView reviewsTitleTextview;
-        private TextView trailersTitleTextview;
-        private ImageView splashScreenDetailView;
-        private View includeDetailSectionTrailers;
-        private View includeDetailSectionReviews;
-
-
-//        private View scrimView;
-
-        public ViewHolder(View rootView) {
-            this.rootView = rootView;
-            splashScreenDetailView = (ImageView) rootView.findViewById(R.id.splash_screen_detail_view);
-
-            parentViewGroup = (ViewGroup) rootView.findViewById(R.id.movie_detail_container);
-            movieDetaillinearLayout = (LinearLayout) rootView.findViewById(R.id.movie_detail_container);
-            includeDetailSectionTrailers = rootView.findViewById(R.id.include_detail_section_trailers);
-            includeDetailSectionReviews = rootView.findViewById(R.id.include_detail_section_reviews);
-
-            ratingBarLayout = (FrameLayout) rootView.findViewById(R.id.rating_bar);
-            titleView = (TextView) rootView.findViewById(R.id.textview_title);
-            ratingView = (TextView) rootView.findViewById(R.id.textview_rating);
-            backdropView = (ImageView) rootView.findViewById(R.id.backdrop);
-            posterView = (ImageView) rootView.findViewById(R.id.imageview_poster_detail_fragment);
-            dateView = (TextView) rootView.findViewById(R.id.textview_release_date);
-            overviewView = (TextView) rootView.findViewById(R.id.textview_overview);
-            fabFavorite = (FloatingActionButton) rootView.findViewById(R.id.fab_favorite);
-//            scrimView = rootView.findViewById(R.id.scrim);
-            trailerList = (RecyclerView) rootView.findViewById(R.id.detail_trailer_recycler_view);
-            reviewList = (RecyclerView) rootView.findViewById(R.id.detail_review_recycler_view);
-            detailInformationlinearLayout = (LinearLayout) rootView.findViewById(R.id.layout_detail_information);
-            separatorReviews = rootView.findViewById(R.id.separator_reviews);
-            separatorTrailers = rootView.findViewById(R.id.separator_trailers);
-
-            reviewsTitleTextview = (TextView) rootView.findViewById(R.id.detail_review_textview_title);
-            trailersTitleTextview = (TextView) rootView.findViewById(R.id.detail_trailer_textview_title);
-            imageView = (ParallaxScrimageView) rootView.findViewById(R.id.shot);
-            popupLayout = (LinearLayout) rootView.findViewById(R.id.container);
-            detailScrollView = (ScrollView) rootView.findViewById(R.id.detail_scrollview);
-        }
-    }
+//    public class ViewHolder {
+//
+//        @Bind(R.id.movie_detail_container)
+//        ViewGroup parentViewGroup;
+////        LinearLayout movieDetaillinearLayout;
+//        @Bind(R.id.layout_detail_information)
+//        LinearLayout detailInformationlinearLayout;
+//        @Bind(R.id.container)
+//        LinearLayout popupLayout;
+//        @Bind(R.id.shot)
+//        ParallaxScrimageView imageView;
+//        @Bind(R.id.detail_scrollview)
+//        ScrollView detailScrollView;
+//        @Bind(R.id.rating_bar)
+//        FrameLayout ratingBarLayout;
+//        View rootView;
+//        @Bind(R.id.textview_title)
+//        TextView titleView;
+//        @Bind(R.id.imageview_poster_detail_fragment)
+//        ImageView posterView;
+//        @Bind(R.id.backdrop)
+//        ImageView backdropView;
+//        @Bind(R.id.textview_release_date)
+//        TextView dateView;
+//        @Bind(R.id.textview_rating)
+//        TextView ratingView;
+//        @Bind(R.id.textview_overview)
+//        TextView overviewView;
+//        @Bind(R.id.detail_trailer_recycler_view)
+//        RecyclerView trailerList;
+//        @Bind(R.id.detail_review_recycler_view)
+//        RecyclerView reviewList;
+//        @Bind(R.id.fab_favorite)
+//        FloatingActionButton fabFavorite;
+//        @Bind(R.id.separator_reviews)
+//        View separatorReviews;
+//        @Bind(R.id.separator_trailers)
+//        View separatorTrailers;
+//        @Bind(R.id.detail_review_textview_title)
+//        TextView reviewsTitleTextview;
+//        @Bind(R.id.detail_trailer_textview_title)
+//        TextView trailersTitleTextview;
+//        @Bind(R.id.splash_screen_detail_view)
+//        ImageView splashScreenDetailView;
+//        @Bind(R.id.include_detail_section_trailers)
+//        View includeDetailSectionTrailers;
+//        @Bind(R.id.include_detail_section_reviews)
+//        View includeDetailSectionReviews;
+//
+//
+////        private View scrimView;
+//
+//        public ViewHolder(View rootView) {
+//            this.rootView = rootView;
+//
+//            splashScreenDetailView = (ImageView) rootView.findViewById(R.id.splash_screen_detail_view);
+//
+//            parentViewGroup = (ViewGroup) rootView.findViewById(R.id.movie_detail_container);
+////            movieDetaillinearLayout = (LinearLayout) rootView.findViewById(R.id.movie_detail_container);
+//            includeDetailSectionTrailers = rootView.findViewById(R.id.include_detail_section_trailers);
+//            includeDetailSectionReviews = rootView.findViewById(R.id.include_detail_section_reviews);
+//
+//            ratingBarLayout = (FrameLayout) rootView.findViewById(R.id.rating_bar);
+//            titleView = (TextView) rootView.findViewById(R.id.textview_title);
+//            ratingView = (TextView) rootView.findViewById(R.id.textview_rating);
+//            backdropView = (ImageView) rootView.findViewById(R.id.backdrop);
+//            posterView = (ImageView) rootView.findViewById(R.id.imageview_poster_detail_fragment);
+//            dateView = (TextView) rootView.findViewById(R.id.textview_release_date);
+//            overviewView = (TextView) rootView.findViewById(R.id.textview_overview);
+//            fabFavorite = (FloatingActionButton) rootView.findViewById(R.id.fab_favorite);
+////            scrimView = rootView.findViewById(R.id.scrim);
+//            trailerList = (RecyclerView) rootView.findViewById(R.id.detail_trailer_recycler_view);
+//            reviewList = (RecyclerView) rootView.findViewById(R.id.detail_review_recycler_view);
+//            detailInformationlinearLayout = (LinearLayout) rootView.findViewById(R.id.layout_detail_information);
+//            separatorReviews = rootView.findViewById(R.id.separator_reviews);
+//            separatorTrailers = rootView.findViewById(R.id.separator_trailers);
+//
+//            reviewsTitleTextview = (TextView) rootView.findViewById(R.id.detail_review_textview_title);
+//            trailersTitleTextview = (TextView) rootView.findViewById(R.id.detail_trailer_textview_title);
+//            imageView = (ParallaxScrimageView) rootView.findViewById(R.id.shot);
+//            popupLayout = (LinearLayout) rootView.findViewById(R.id.container);
+//            detailScrollView = (ScrollView) rootView.findViewById(R.id.detail_scrollview);
+//        }
+//    }
 
 
     //****************************************************************************//
