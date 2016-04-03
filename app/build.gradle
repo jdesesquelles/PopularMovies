@@ -63,7 +63,7 @@ dependencies {
     compile "com.google.apis:google-api-services-youtube:$rootProject.ext.gasyoutubeVersion"
     compile "com.android.support:palette-v7:$rootProject.ext.paletteV7Version"
     compile files('libs/YouTubeAndroidPlayerApi.jar')
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
 }

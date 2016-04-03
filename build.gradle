@@ -41,6 +41,8 @@ ext {
     junitVersion = '4.12'
     supportAnnotationsVersion = '23.1.1'
     paletteV7Version = '23.1.1'
+    butterknifeVersion = '7.0.1'
+
 
     mockitoVersion = '1.10.19'
     powerMockito = '1.6.2'
