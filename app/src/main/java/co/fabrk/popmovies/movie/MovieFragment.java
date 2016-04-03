@@ -63,7 +63,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     private Uri mUri;
     public static final String DETAIL_URI = "URI";
     private static final String TAG = "MovieFragment";
-    private ViewHolder viewHolder;
+    //    private ViewHolder viewHolder;
     private Palette mPalette;
     private ArrayMap mapSwatch;
     private ArrayMap mapPalette;
@@ -160,30 +160,46 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
                              Bundle savedInstanceState) {
 
         View view;
-        view = inflater.inflate(R.layout.detail_fragment, container, false);
-        ButterKnife.bind(this, view);
-        viewHolder = new ViewHolder(view);
+        rootView = inflater.inflate(R.layout.detail_fragment, container, false);
+        ButterKnife.bind(this, rootView);
         Bundle arguments = getArguments();
         if (mMovie != null) {
 //        setExitSharedElementCallback(fabLoginSharedElementCallback);
             showMovieDetail(mMovie);
-            setListeners();
+//            setListeners();
         } else {
             showEmptyScreen(); //splashScreenDetailView
         }
-        return view;
+        return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mMovie != null) {
+            setListeners();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unsetListeners();
+    }
 
     // Listeners
     private void setListeners() {
-        final FloatingActionButton fab = viewHolder.fabFavorite;
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleFavorite(fab);
+                toggleFavorite(fabFavorite);
             }
         });
+
+    }
+
+    private void unsetListeners() {
+        fabFavorite.setOnClickListener(null);
 
     }
 
@@ -269,11 +285,11 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     //****************************************************************************//
 
     private void showEmptyScreen() {
-        viewHolder.fabFavorite.setVisibility(View.GONE);
-        viewHolder.popupLayout.setVisibility(View.GONE);
-        viewHolder.detailScrollView.setVisibility(View.GONE);
-        viewHolder.imageView.setVisibility(View.GONE);
-        viewHolder.splashScreenDetailView.setVisibility(View.VISIBLE);
+        fabFavorite.setVisibility(View.GONE);
+        popupLayout.setVisibility(View.GONE);
+        detailScrollView.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
+        splashScreenDetailView.setVisibility(View.VISIBLE);
     }
 
     private SharedElementCallback fabLoginSharedElementCallback = new SharedElementCallback() {
@@ -295,65 +311,60 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
 
     public void showMovieDetail(TMDBMovie movie) {
 
-        viewHolder.fabFavorite.setVisibility(View.VISIBLE);
-        viewHolder.popupLayout.setVisibility(View.VISIBLE);
-        viewHolder.detailScrollView.setVisibility(View.VISIBLE);
-        viewHolder.imageView.setVisibility(View.VISIBLE);
-        viewHolder.splashScreenDetailView.setVisibility(View.GONE);
+        fabFavorite.setVisibility(View.VISIBLE);
+        popupLayout.setVisibility(View.VISIBLE);
+        detailScrollView.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.VISIBLE);
+        splashScreenDetailView.setVisibility(View.GONE);
 
-        viewHolder.rootView.setVerticalScrollBarEnabled(true);
-
-        viewHolder.titleView.setText(movie.getTitle());
-        viewHolder.titleView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), getActivity().getString(R.string.customTextFont)));
-        Picasso.with(viewHolder.rootView.getContext()).load(movie.getThumbnailPath()).into(viewHolder.posterView);
+        rootView.setVerticalScrollBarEnabled(true);
+        titleView.setText(movie.getTitle());
+        titleView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), getActivity().getString(R.string.customTextFont)));
+        Picasso.with(rootView.getContext()).load(movie.getThumbnailPath()).into(posterView);
         loadBitmap(movie.getBackdrop());
-//        Picasso.with(rootView.getContext()).load(movie.getBackdrop()).into(backdropView);
-        viewHolder.dateView.setText(DateUtils.formatDate(movie.getReleaseDate()));
-        viewHolder.ratingView.setText(movie.getVoteAverage());
-        viewHolder.overviewView.setText(movie.getOverview());
+        dateView.setText(DateUtils.formatDate(movie.getReleaseDate()));
+        ratingView.setText(movie.getVoteAverage());
+        overviewView.setText(movie.getOverview());
         if (movie.getTmdbTrailers() != null) {
             showTrailers(movie.getTmdbTrailers());
-            viewHolder.includeDetailSectionTrailers.setVisibility(View.VISIBLE);
+            includeDetailSectionTrailers.setVisibility(View.VISIBLE);
         } else {
-            viewHolder.includeDetailSectionTrailers.setVisibility(View.GONE);
+            includeDetailSectionTrailers.setVisibility(View.GONE);
         }
         if (movie.getTmdbReviews() != null) {
             showReviews(movie.getTmdbReviews());
-            viewHolder.includeDetailSectionReviews.setVisibility(View.VISIBLE);
+            includeDetailSectionReviews.setVisibility(View.VISIBLE);
         } else {
-            viewHolder.includeDetailSectionReviews.setVisibility(View.GONE);
+            includeDetailSectionReviews.setVisibility(View.GONE);
         }
 
-        viewHolder.popupLayout.setVisibility(View.GONE);
+        popupLayout.setVisibility(View.GONE);
 
         // Fab
         if (TmdbProviderUtils.isFavoriteMovie(mMovie, getContext())) {
-            viewHolder.fabFavorite.setImageDrawable(getActivity().getDrawable(R.drawable.ic_favorite));
+            fabFavorite.setImageDrawable(getActivity().getDrawable(R.drawable.ic_favorite));
         } else {
-            viewHolder.fabFavorite.setImageDrawable(getActivity().getDrawable(R.drawable.ic_favorite_outline_24dp));
+            fabFavorite.setImageDrawable(getActivity().getDrawable(R.drawable.ic_favorite_outline_24dp));
         }
-        viewHolder.fabFavorite.setTransitionName(getString(R.string.transition_popup));
+        fabFavorite.setTransitionName(getString(R.string.transition_popup));
 
     }
 
     public void showTrailers(ArrayList<TMDBTrailer> trailers) {
         if (mTrailerAdapter == null) {
-//            mTrailerAdapter = new TrailerCursorAdapter(getActivity(), trailerCursor, 0);
             mTrailerAdapter = new TrailerCursorAdapter(getActivity());
-
         }
-        viewHolder.trailerList.setAdapter(mTrailerAdapter);
-        viewHolder.trailerList.setLayoutManager(
+        trailerList.setAdapter(mTrailerAdapter);
+        trailerList.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
     }
 
     public void showReviews(ArrayList<TMDBReview> reviews) {
         if (mReviewAdapter == null) {
             mReviewAdapter = new ReviewCursorAdapter(getActivity());
         }
-        viewHolder.reviewList.setAdapter(mReviewAdapter);
-        viewHolder.reviewList.setLayoutManager(
+        reviewList.setAdapter(mReviewAdapter);
+        reviewList.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
@@ -386,7 +397,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     }
 
     private void handleLoadedBitmap(Bitmap b) {
-        viewHolder.backdropView.setImageBitmap(b);
+        backdropView.setImageBitmap(b);
         Palette.from(b).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
@@ -449,18 +460,18 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
             colorPrimaryLight = ColorUtils.getColorWithTranslateBrightness(((Swatch) mapSwatch.get(key)).getRgb(), COLOR_BRIGHTNESS_DECREASE_TRANSLATION);
             colorAccent = ((Swatch) mapSwatch.get(key)).getTitleTextColor();
 
-            applyColorAccent(viewHolder.titleView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
-            applyColorAccent(viewHolder.dateView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
-            applyColorAccent(viewHolder.overviewView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
-            applyColorAccent(viewHolder.trailersTitleTextview, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
-            applyColorAccent(viewHolder.reviewsTitleTextview, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
+            applyColorAccent(titleView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
+            applyColorAccent(dateView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
+            applyColorAccent(overviewView, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
+            applyColorAccent(trailersTitleTextview, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
+            applyColorAccent(reviewsTitleTextview, "textColor", duration, titleStartDelay, currentAccent, colorAccent);
 
-            applyColorAccent(viewHolder.titleView, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
-            applyColorAccent(viewHolder.separatorTrailers, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
-            applyColorAccent(viewHolder.separatorReviews, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
-            applyColorAccent(viewHolder.movieDetaillinearLayout, "backgroundColor", duration, titleStartDelay, currentPrimaryLightColor, colorPrimaryLight);
-            applyColorAccent(viewHolder.trailersTitleTextview, "backgroundColor", duration, titleStartDelay, currentPrimaryColor, colorPrimary);
-            applyColorAccent(viewHolder.reviewsTitleTextview, "backgroundColor", duration, titleStartDelay, currentPrimaryColor, colorPrimary);
+            applyColorAccent(titleView, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
+            applyColorAccent(separatorTrailers, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
+            applyColorAccent(separatorReviews, "backgroundColor", duration, titleStartDelay, currentPrimaryDarkColor, colorPrimaryDark);
+            applyColorAccent(parentViewGroup, "backgroundColor", duration, titleStartDelay, currentPrimaryLightColor, colorPrimaryLight);
+            applyColorAccent(trailersTitleTextview, "backgroundColor", duration, titleStartDelay, currentPrimaryColor, colorPrimary);
+            applyColorAccent(reviewsTitleTextview, "backgroundColor", duration, titleStartDelay, currentPrimaryColor, colorPrimary);
 
             currentPalette = targetPalette;
             currentAccent = colorAccent;
@@ -572,96 +583,6 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
-
-    //****************************************************************************//
-    //                                 View Holder                                //
-    //****************************************************************************//
-
-//    public class ViewHolder {
-//
-//        @Bind(R.id.movie_detail_container)
-//        ViewGroup parentViewGroup;
-////        LinearLayout movieDetaillinearLayout;
-//        @Bind(R.id.layout_detail_information)
-//        LinearLayout detailInformationlinearLayout;
-//        @Bind(R.id.container)
-//        LinearLayout popupLayout;
-//        @Bind(R.id.shot)
-//        ParallaxScrimageView imageView;
-//        @Bind(R.id.detail_scrollview)
-//        ScrollView detailScrollView;
-//        @Bind(R.id.rating_bar)
-//        FrameLayout ratingBarLayout;
-//        View rootView;
-//        @Bind(R.id.textview_title)
-//        TextView titleView;
-//        @Bind(R.id.imageview_poster_detail_fragment)
-//        ImageView posterView;
-//        @Bind(R.id.backdrop)
-//        ImageView backdropView;
-//        @Bind(R.id.textview_release_date)
-//        TextView dateView;
-//        @Bind(R.id.textview_rating)
-//        TextView ratingView;
-//        @Bind(R.id.textview_overview)
-//        TextView overviewView;
-//        @Bind(R.id.detail_trailer_recycler_view)
-//        RecyclerView trailerList;
-//        @Bind(R.id.detail_review_recycler_view)
-//        RecyclerView reviewList;
-//        @Bind(R.id.fab_favorite)
-//        FloatingActionButton fabFavorite;
-//        @Bind(R.id.separator_reviews)
-//        View separatorReviews;
-//        @Bind(R.id.separator_trailers)
-//        View separatorTrailers;
-//        @Bind(R.id.detail_review_textview_title)
-//        TextView reviewsTitleTextview;
-//        @Bind(R.id.detail_trailer_textview_title)
-//        TextView trailersTitleTextview;
-//        @Bind(R.id.splash_screen_detail_view)
-//        ImageView splashScreenDetailView;
-//        @Bind(R.id.include_detail_section_trailers)
-//        View includeDetailSectionTrailers;
-//        @Bind(R.id.include_detail_section_reviews)
-//        View includeDetailSectionReviews;
-//
-//
-////        private View scrimView;
-//
-//        public ViewHolder(View rootView) {
-//            this.rootView = rootView;
-//
-//            splashScreenDetailView = (ImageView) rootView.findViewById(R.id.splash_screen_detail_view);
-//
-//            parentViewGroup = (ViewGroup) rootView.findViewById(R.id.movie_detail_container);
-////            movieDetaillinearLayout = (LinearLayout) rootView.findViewById(R.id.movie_detail_container);
-//            includeDetailSectionTrailers = rootView.findViewById(R.id.include_detail_section_trailers);
-//            includeDetailSectionReviews = rootView.findViewById(R.id.include_detail_section_reviews);
-//
-//            ratingBarLayout = (FrameLayout) rootView.findViewById(R.id.rating_bar);
-//            titleView = (TextView) rootView.findViewById(R.id.textview_title);
-//            ratingView = (TextView) rootView.findViewById(R.id.textview_rating);
-//            backdropView = (ImageView) rootView.findViewById(R.id.backdrop);
-//            posterView = (ImageView) rootView.findViewById(R.id.imageview_poster_detail_fragment);
-//            dateView = (TextView) rootView.findViewById(R.id.textview_release_date);
-//            overviewView = (TextView) rootView.findViewById(R.id.textview_overview);
-//            fabFavorite = (FloatingActionButton) rootView.findViewById(R.id.fab_favorite);
-////            scrimView = rootView.findViewById(R.id.scrim);
-//            trailerList = (RecyclerView) rootView.findViewById(R.id.detail_trailer_recycler_view);
-//            reviewList = (RecyclerView) rootView.findViewById(R.id.detail_review_recycler_view);
-//            detailInformationlinearLayout = (LinearLayout) rootView.findViewById(R.id.layout_detail_information);
-//            separatorReviews = rootView.findViewById(R.id.separator_reviews);
-//            separatorTrailers = rootView.findViewById(R.id.separator_trailers);
-//
-//            reviewsTitleTextview = (TextView) rootView.findViewById(R.id.detail_review_textview_title);
-//            trailersTitleTextview = (TextView) rootView.findViewById(R.id.detail_trailer_textview_title);
-//            imageView = (ParallaxScrimageView) rootView.findViewById(R.id.shot);
-//            popupLayout = (LinearLayout) rootView.findViewById(R.id.container);
-//            detailScrollView = (ScrollView) rootView.findViewById(R.id.detail_scrollview);
-//        }
-//    }
-
 
     //****************************************************************************//
     //                                 Event call back                            //

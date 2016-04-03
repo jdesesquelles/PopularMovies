@@ -31,6 +31,9 @@ import co.fabrk.popmovies.data.TmdbContract;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,18 +45,29 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     private String sortOption = TmdbConstants.SORT_VALUE_POPULAR;
 
     //Todo: implement view holder
-    private ImageView splashScreenImageView;
-    private TabLayout tabLayout;
-    private ImageView emptyView;
-    private GridView discoverGridView;
-    private LinearLayout mainLayout;
+    @Bind(R.id.splash_screen_view)
+    ImageView splashScreenImageView;
+
+    @Bind(R.id.main_tab_layout)
+    TabLayout tabLayout;
+
+    @Bind(R.id.gridview_movies)
+    GridView discoverGridView;
+
+    @Bind(R.id.empty_image_view)
+    ImageView emptyView;
+
+    @Bind(R.id.main_layout)
+    LinearLayout mainLayout;
+
+    @Bind(R.id.fab_anim)
+    FloatingActionButton fabAnim;
+
+    @Bind(R.id.fab_sync)
+    FloatingActionButton fabSync;
 
     // Adapter
     private MovieCursorAdapter mMovieAdapter;
-
-    // Todo: delete - Fab
-    private FloatingActionButton fabSync;
-    private FloatingActionButton fabAnim;
 
     // Loader
     private static final int POPULAR_MOVIE_LOADER = 0;
@@ -77,13 +91,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     //****************************************************************************//
 
     private void setViews(View rootView) {
-        splashScreenImageView = (ImageView) rootView.findViewById(R.id.splash_screen_view);
-        discoverGridView = (GridView) rootView.findViewById(R.id.gridview_movies);
-        tabLayout = (TabLayout) rootView.findViewById(R.id.main_tab_layout);
-        emptyView = (ImageView) rootView.findViewById(R.id.empty_image_view);
-        mainLayout = (LinearLayout) rootView.findViewById(R.id.main_layout);
-        fabAnim = (FloatingActionButton) rootView.findViewById(R.id.fab_anim);
-        fabSync = (FloatingActionButton) rootView.findViewById(R.id.fab_sync);
 
         // Initliazing tabs
         tabLayout.addTab(tabLayout.newTab().setText(TmdbConstants.SORT_VALUE_POPULAR).setIcon(R.drawable.ic_whatshot_black));
@@ -147,6 +154,14 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
 
     }
 
+// Unregistering the listeners
+    private void unsetListeners() {
+        tabLayout.setOnTabSelectedListener(null);
+        discoverGridView.setOnItemClickListener(null);
+        fabSync.setOnClickListener(null);
+        fabAnim.setOnClickListener(null);
+    }
+
     //****************************************************************************//
     //                                 Fragment LifeCycle                         //
     //****************************************************************************//
@@ -185,6 +200,7 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onResume() {
         super.onResume();
+        setListeners();
 //        Log.e(TAG, "onResume: ");
 //        if (sortOption.equals("favorite")) {
 //            updateMovie();
@@ -194,6 +210,7 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onPause() {
         super.onPause();
+        unsetListeners();
     }
 
     @Override
@@ -202,13 +219,13 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
 
         mMovieAdapter = new MovieCursorAdapter(getActivity(), null, 0);
         View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+        ButterKnife.bind(this, rootView);
         setViews(rootView);
         // Start Animation
         showSplash();
         animSplash();
 //        showMovieGrid();
-        setListeners();
-
+//        setListeners();
         return rootView;
     }
 
