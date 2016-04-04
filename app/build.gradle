@@ -64,6 +64,10 @@ dependencies {
     compile "com.android.support:palette-v7:$rootProject.ext.paletteV7Version"
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttpVersion"
+    compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
 }
