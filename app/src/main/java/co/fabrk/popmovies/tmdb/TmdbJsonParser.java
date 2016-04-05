@@ -14,39 +14,13 @@ import java.util.ArrayList;
  */
 class TmdbJsonParser {
 
-    // JSON OBJECTS
-    // JSON ARRAY
-    // Key
-    // Values
-
-    private static final String TMDB_RESULTS = "results";
-
-    // Main URL Discover movies
-    private static final String TMDB_ID = "id";
-    private static final String TMDB_POSTER_PATH = "poster_path";
-    private static final String TMDB_TITLE = "title";
-    private static final String TMDB_RELEASE_DATE = "release_date";
-    private static final String TMDB_VOTE_AVERAGE = "vote_average";
-    private static final String TMDB_PLOT_OVERVIEW = "overview";
-    private static final String TMDB_POPULARITY = "popularity";
-    private static final String TMDB_BACKDROP = "backdrop_path";
-    // Reviews field
-    private static final String TMDB_REVIEW_AUTHOR = "author";
-    private static final String TMDB_RVIEW_CONTENT = "content";
-    // Trailer
-    public static final String TMDB_TRAILER = "youtube";
-    private static final String TMDB_TRAILER_NAME = "name";
-    private static final String TMDB_TRAILER_KEY = "key";
-    private static final String TMDB_TRAILER_ID = "id";
-    private static final String TMDB_TRAILER_SITE = "site";
-
     public static ArrayList<TMDBMovie> getMovieListFromTmdbJson(String movieJsonStr) throws JSONException {
         // Field names in JSON
 
         if (movieJsonStr == null) {return null;}
 
         JSONObject movieJson = new JSONObject(movieJsonStr);
-        JSONArray movieList = movieJson.getJSONArray(TMDB_RESULTS);
+        JSONArray movieList = movieJson.getJSONArray(TmdbConstants.TMDB_RESULTS);
 
         TMDBMovie movie;
         ArrayList<TMDBMovie> movieArrayList = new ArrayList<>();
@@ -54,14 +28,14 @@ class TmdbJsonParser {
 
         for (int i = 0; i < movieList.length(); i++) {
             JSONObject resultItem = movieList.getJSONObject(i);
-            movieInfo[0] = resultItem.getString(TMDB_ID);
-            movieInfo[1] = resultItem.getString(TMDB_TITLE);
-            movieInfo[2] = resultItem.getString(TMDB_POSTER_PATH);
-            movieInfo[3] = resultItem.getString(TMDB_RELEASE_DATE);
-            movieInfo[4] = resultItem.getString(TMDB_VOTE_AVERAGE);
-            movieInfo[5] = resultItem.getString(TMDB_PLOT_OVERVIEW);
-            movieInfo[6] = resultItem.getString(TMDB_POPULARITY);
-            movieInfo[7] = resultItem.getString(TMDB_BACKDROP);
+            movieInfo[0] = resultItem.getString(TmdbConstants.TMDB_ID);
+            movieInfo[1] = resultItem.getString(TmdbConstants.TMDB_TITLE);
+            movieInfo[2] = resultItem.getString(TmdbConstants.TMDB_POSTER_PATH);
+            movieInfo[3] = resultItem.getString(TmdbConstants.TMDB_RELEASE_DATE);
+            movieInfo[4] = resultItem.getString(TmdbConstants.TMDB_VOTE_AVERAGE);
+            movieInfo[5] = resultItem.getString(TmdbConstants.TMDB_PLOT_OVERVIEW);
+            movieInfo[6] = resultItem.getString(TmdbConstants.TMDB_POPULARITY);
+            movieInfo[7] = resultItem.getString(TmdbConstants.TMDB_BACKDROP);
             movie = new TMDBMovie(movieInfo);
             movieArrayList.add(movie);
         }
@@ -73,15 +47,15 @@ class TmdbJsonParser {
 
 
         JSONObject reviewsJsonObj = new JSONObject(reviewsJson);
-        JSONArray reviewList = reviewsJsonObj.getJSONArray(TMDB_RESULTS);
+        JSONArray reviewList = reviewsJsonObj.getJSONArray(TmdbConstants.TMDB_RESULTS);
 
         ArrayList<TMDBReview> TMDBReviewArrayList = new ArrayList<>();
 
         for (int i = 0; i < reviewList.length(); i++) {
             TMDBReview TMDBReview = new TMDBReview();
             JSONObject resultItem = reviewList.getJSONObject(i);
-            TMDBReview.setAuthor(resultItem.getString(TMDB_REVIEW_AUTHOR));
-            TMDBReview.setContent(resultItem.getString(TMDB_RVIEW_CONTENT));
+            TMDBReview.setAuthor(resultItem.getString(TmdbConstants.TMDB_REVIEW_AUTHOR));
+            TMDBReview.setContent(resultItem.getString(TmdbConstants.TMDB_RVIEW_CONTENT));
             TMDBReviewArrayList.add(TMDBReview);
 
         }
@@ -96,18 +70,18 @@ class TmdbJsonParser {
         ArrayList<TMDBTrailer> trailerArrayList = new ArrayList<>();
 
         JSONObject trailersJsonObj = new JSONObject(trailersJson);
-        JSONArray trailerList = trailersJsonObj.getJSONArray(TMDB_RESULTS);
+        JSONArray trailerList = trailersJsonObj.getJSONArray(TmdbConstants.TMDB_RESULTS);
 
         for (int i = 0; i < trailerList.length(); i++) {
             JSONObject trailer = trailerList.getJSONObject(i);
-            String trailerSite = trailer.getString(TMDB_TRAILER_SITE);
-            Log.e("trailer site", trailer.getString(TMDB_TRAILER_SITE));
+            String trailerSite = trailer.getString(TmdbConstants.TMDB_TRAILER_SITE);
+            Log.e("trailer site", trailer.getString(TmdbConstants.TMDB_TRAILER_SITE));
 
             if (trailerSite.equals("YouTube")) {
                 TMDBTrailer tmdbTrailer = new TMDBTrailer();
-                tmdbTrailer.setName(trailer.getString(TMDB_TRAILER_NAME));
-                tmdbTrailer.setKey(trailer.getString(TMDB_TRAILER_KEY));
-                tmdbTrailer.setId(trailer.getString(TMDB_TRAILER_ID));
+                tmdbTrailer.setName(trailer.getString(TmdbConstants.TMDB_TRAILER_NAME));
+                tmdbTrailer.setKey(trailer.getString(TmdbConstants.TMDB_TRAILER_KEY));
+                tmdbTrailer.setId(trailer.getString(TmdbConstants.TMDB_TRAILER_ID));
                 tmdbTrailer.setSite(trailerSite);
                 trailerArrayList.add(tmdbTrailer);
             }

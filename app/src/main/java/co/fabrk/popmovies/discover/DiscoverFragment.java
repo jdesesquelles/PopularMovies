@@ -33,6 +33,8 @@ import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -78,12 +80,18 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     private int mPosition = GridView.INVALID_POSITION;
 
     private void updateMovie() {
+        // TODO: 05/04/16
         //Most popular
-        FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
-        movieTaskPopular.execute(TmdbConstants.POPULAR);
-        //Highest Rated
-        FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
-        movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
+//        FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
+//        movieTaskPopular.execute(TmdbConstants.POPULAR);
+//        //Highest Rated
+//        FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
+//        movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(TmdbConstants.MOVIE_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     //****************************************************************************//

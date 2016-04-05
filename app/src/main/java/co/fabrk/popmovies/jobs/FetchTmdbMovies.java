@@ -30,23 +30,15 @@ public class FetchTmdbMovies extends AsyncTask<String, Void, ArrayList<TMDBMovie
 //        TmdbDatabaseOperations.deleteOldData(mContentResolver);
         switch (params[0]) {
             case TmdbConstants.POPULAR:
-                // TODO: uncomment Netowrk connection set for actual devices
-//            if (Utility.isWifiConnectionAvailable(mContentResolver)) {
                 movieArrayList = TmdbRequestApi.getPopularMovies();
                 if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContentResolver);
                     TmdbDatabaseOperations.addPopularList(movieArrayList, mContentResolver);
                 }
-//            }
-//            else movieArrayList=null;
             case TmdbConstants.HIGHEST_RATED:
-                // TODO: uncomment Netowrk connection set for actual devices
-//            if (Utility.isWifiConnectionAvailable(mContentResolver)) {
                 movieArrayList = TmdbRequestApi.getHighestRatedMovies();
                 if (movieArrayList != null) {TmdbDatabaseOperations.addBulkMovies(movieArrayList, mContentResolver);
                     TmdbDatabaseOperations.addHighestRatedList(movieArrayList, mContentResolver);
                 }
-//            }
-//            else movieArrayList=null;
             default:
                 movieArrayList=null;
                 TMDBMovie movie = Utility.createHardCodedData();

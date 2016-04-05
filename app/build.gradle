@@ -70,6 +70,9 @@ dependencies {
     compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     compile "com.facebook.stetho:stetho:$rootProject.ext.stethoVersion"
     compile "com.facebook.stetho:stetho-okhttp3:$rootProject.ext.stethoVersion"
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'javax.validation:validation-api:1.0.0.GA'
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
 }

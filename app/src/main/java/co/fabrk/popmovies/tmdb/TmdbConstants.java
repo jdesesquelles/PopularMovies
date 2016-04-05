@@ -65,5 +65,27 @@ public class TmdbConstants {
             API_KEY_VALUE = apiKey;
         }
     }
+    
+    //JSON Schema
+    public static final String TMDB_RESULTS = "results";
+
+    // Main URL Discover movies
+    public static final String TMDB_ID = "id";
+    public static final String TMDB_POSTER_PATH = "poster_path";
+    public static final String TMDB_TITLE = "title";
+    public static final String TMDB_RELEASE_DATE = "release_date";
+    public static final String TMDB_VOTE_AVERAGE = "vote_average";
+    public static final String TMDB_PLOT_OVERVIEW = "overview";
+    public static final String TMDB_POPULARITY = "popularity";
+    public static final String TMDB_BACKDROP = "backdrop_path";
+    // Reviews field
+    public static final String TMDB_REVIEW_AUTHOR = "author";
+    public static final String TMDB_RVIEW_CONTENT = "content";
+    // Trailer
+    public static final String TMDB_TRAILER = "youtube";
+    public static final String TMDB_TRAILER_NAME = "name";
+    public static final String TMDB_TRAILER_KEY = "key";
+    public static final String TMDB_TRAILER_ID = "id";
+    public static final String TMDB_TRAILER_SITE = "site";
 
 }

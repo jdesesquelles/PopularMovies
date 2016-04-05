@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 import co.fabrk.popmovies.data.TmdbContract;
@@ -14,7 +16,7 @@ import co.fabrk.popmovies.data.TmdbContract;
 public class TMDBMovie implements Parcelable {
 
     //Todo: adjust backrop and poster size
-    //Then you will need a ‘size’, which will be one of the following:
+    // size’, is one of the following:
     // "w92", "w154", "w185", "w342", "w500", "w780", or "original".
     // For most phones we recommend using “w185”.
     // getSystemService.getWitdh(), switch case
@@ -23,14 +25,21 @@ public class TMDBMovie implements Parcelable {
     private String imageBaseUrl = "http://image.tmdb.org/t/p/";
     private String imageWidth = "w342";
     private String BaseUrl = imageBaseUrl + imageWidth;
-//    "http://image.tmdb.org/t/p/w185";
+    @SerializedName(TmdbConstants.TMDB_ID)
     public String id;
+    @SerializedName(TmdbConstants.TMDB_TITLE)
     public String title;
+    @SerializedName(TmdbConstants.TMDB_POSTER_PATH)
     public String thumbnailPath;
+    @SerializedName(TmdbConstants.TMDB_RELEASE_DATE)
     public String releaseDate;
+    @SerializedName(TmdbConstants.TMDB_VOTE_AVERAGE)
     public String voteAverage;
+    @SerializedName(TmdbConstants.TMDB_POPULARITY)
     public String popularity;
+    @SerializedName(TmdbConstants.TMDB_PLOT_OVERVIEW)
     public String overview;
+    @SerializedName(TmdbConstants.TMDB_BACKDROP)
     public String backdrop;
     private ArrayList<TMDBTrailer> tmdbTrailers;
     private ArrayList<TMDBReview> tmdbReviews;
