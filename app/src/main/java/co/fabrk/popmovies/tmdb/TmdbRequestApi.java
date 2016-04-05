@@ -12,11 +12,49 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.POST;
+import retrofit2.http.Body;
+import retrofit2.Call;
+import java.util.List;
 
 /**
  * Created by ebal on 02/12/15.
  */
 public class TmdbRequestApi {
+
+    public static void get() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(TmdbConstants.MOVIE_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+    }
+
+    public interface TmdbApiEndpointInterface {
+        // Request method and URL specified in the annotation
+        // Callback for the parsed response is the last parameter
+
+        @GET("discover/movie")
+        Call<List<TMDBMovie>> getPopularMovies(@Path("id") int groupId, @Query("key") String key);
+
+        @GET("discover/movie")
+        Call<List<TMDBMovie>> getHighestRatedMovies(@Path("id") int groupId, @Query("key") String key);
+
+        @GET("movie/{id}")
+        Call<TMDBMovie> getExtraInfo(@Path("id") String id, @Query("key") String key);
+
+        @GET("videos")
+        Call<List<TMDBMovie>> getTrailers(@Path("id") int groupId, @Query("key") String key);
+
+        @GET("reviews")
+        Call<List<TMDBMovie>> getReviews(@Path("id") int groupId, @Query("key") String key);
+
+    }
 
     private static final String TAG = "TmdbRequestApi";
 
