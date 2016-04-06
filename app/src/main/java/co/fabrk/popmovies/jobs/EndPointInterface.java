@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 /**
  * Created by ebal on 05/04/16.
  */
-public interface EndPointService {
+public interface EndPointInterface {
     @GET("discover/movie")
     Call<List<TMDBMovie>> getPopularMovies(@Path("id") int groupId, @Query("key") String key);
 
