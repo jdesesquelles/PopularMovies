@@ -11,7 +11,7 @@
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment_movies"
-        android:name="co.fabrk.popmovies.discover.DiscoverFragment"
+        android:name="co.fabrk.popmovies.browseCatalog.BrowseCatalog"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"

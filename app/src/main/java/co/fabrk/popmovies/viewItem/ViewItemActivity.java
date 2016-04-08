@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.movie;
+package co.fabrk.popmovies.viewItem;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.ui.transitions.FabDialogMorphSetup;
 
-public class MovieActivity extends AppCompatActivity implements MovieFragment.Callback {
+public class ViewItemActivity extends AppCompatActivity implements ViewItemFragment.Callback {
 
     private View mUpButtonContainer;
     private View mUpButton;
@@ -38,7 +38,7 @@ public class MovieActivity extends AppCompatActivity implements MovieFragment.Ca
         if (savedInstanceState == null) {
             Bundle args = new Bundle();
             args.putParcelable(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME, getIntent().getParcelableExtra(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME));
-            MovieFragment fragment = new MovieFragment();
+            ViewItemFragment fragment = new ViewItemFragment();
             fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.movie_detail_container, fragment)

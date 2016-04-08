@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.discover;
+package co.fabrk.popmovies.browseCatalog;
 
 import android.content.Context;
 import android.database.Cursor;

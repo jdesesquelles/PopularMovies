@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.movie;
+package co.fabrk.popmovies.viewItem;
 
 import android.content.Context;
 //import android.support.v4.widget.CursorAdapter;

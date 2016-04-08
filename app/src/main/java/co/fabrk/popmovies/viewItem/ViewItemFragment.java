@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.movie;
+package co.fabrk.popmovies.viewItem;
 
 import android.animation.ValueAnimator;
 import android.database.Cursor;
@@ -51,12 +51,12 @@ import co.fabrk.popmovies.ui.utils.ColorUtils;
 import co.fabrk.popmovies.ui.utils.DateUtils;
 import co.fabrk.popmovies.ui.widget.ParallaxScrimageView;
 
-public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ViewItemFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private TMDBMovie mMovie;
     private Uri mUri;
     public static final String DETAIL_URI = "URI";
-    private static final String TAG = "MovieFragment";
+    private static final String TAG = "ViewItemFragment";
     //    private ViewHolder viewHolder;
     private Palette mPalette;
     private ArrayMap mapSwatch;
@@ -120,7 +120,7 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     View includeDetailSectionReviews;
 
 
-    public MovieFragment() {
+    public ViewItemFragment() {
         setHasOptionsMenu(true);
     }
 

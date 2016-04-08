@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:ignore="MergeRootFrame"
-    tools:context=".discover.DiscoverFragment_">
+    tools:context=".browseCatalog.BrowseCatalog_">
 
     <LinearLayout
         android:id="@+id/main_layout"

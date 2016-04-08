@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:orientation="vertical"
-            tools:context=".movie.MovieFragment">
+            tools:context=".viewItem.ViewItemFragment">
 
             <co.fabrk.popmovies.ui.widget.ThreeTwoImageView
                 android:id="@+id/backdrop"

@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.movie;
+package co.fabrk.popmovies.viewItem;
 
 import android.content.Context;
 import android.net.Uri;

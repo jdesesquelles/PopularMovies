@@ -1,4 +1,4 @@
-package co.fabrk.popmovies.discover;
+package co.fabrk.popmovies.browseCatalog;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,12 +8,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.support.v4.app.LoaderManager;
@@ -30,35 +28,24 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.List;
-
-import co.fabrk.popmovies.jobs.EndPointInterface;
 import co.fabrk.popmovies.jobs.EndpointService;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.jobs.FetchTmdbMovies;
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.data.TmdbContract;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
-import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
-import butterknife.Bind;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
-import butterknife.ButterKnife;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import co.fabrk.popmovies.model.TmdbResponse;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 @EFragment(R.layout.main_fragment)
-public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     View mRootView;
-    private static final String TAG = "DiscoverFragment";
+    private static final String TAG = "BrowseCatalog";
     //    private DiscoverContract.UserActionsListener mActionsListener;
     private String selectedTabParcelableName = "selectedTab";
     private String currentPositionParcelableName = "currentPosition";
