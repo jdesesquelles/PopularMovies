@@ -9,16 +9,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import butterknife.OnClick;
 import co.fabrk.popmovies.Popup;
 import co.fabrk.popmovies.R;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.ui.transitions.FabDialogMorphSetup;
 
+@EActivity(R.layout.detail_activity)
 public class ViewItemActivity extends AppCompatActivity implements ViewItemFragment.Callback {
 
-    private View mUpButtonContainer;
-    private View mUpButton;
+    @ViewById(R.id.up_container) View mUpButtonContainer;
+    @ViewById(R.id.action_up) View mUpButton;
 
     @Override
     public void onItemSelected(TMDBMovie movie, View view) {
@@ -28,13 +34,18 @@ public class ViewItemActivity extends AppCompatActivity implements ViewItemFragm
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
                 (this, view, view.getTransitionName());
         startActivityForResult(popUp, 0, options.toBundle());
-    }
 
+    }
+    @Click(R.id.action_up)
+    void onClickActionUp () {
+        onSupportNavigateUp();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_activity);
+        // TODO: 08/04/16 Delete
+//        setContentView(R.layout.detail_activity);
         if (savedInstanceState == null) {
             Bundle args = new Bundle();
             args.putParcelable(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME, getIntent().getParcelableExtra(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME));
@@ -44,16 +55,17 @@ public class ViewItemActivity extends AppCompatActivity implements ViewItemFragm
                     .add(R.id.movie_detail_container, fragment)
                     .commit();
         }
+        // TODO: 08/04/16 Delete
+//        mUpButtonContainer = findViewById(R.id.up_container);
+//        mUpButton = findViewById(R.id.action_up);
 
-        mUpButtonContainer = findViewById(R.id.up_container);
-
-        mUpButton = findViewById(R.id.action_up);
-        mUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSupportNavigateUp();
-            }
-        });
+        // TODO: 08/04/16 Delete
+//        mUpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onSupportNavigateUp();
+//            }
+//        });
     }
 
     @Override
