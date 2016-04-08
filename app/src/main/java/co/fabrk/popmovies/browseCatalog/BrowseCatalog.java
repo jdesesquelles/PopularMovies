@@ -25,7 +25,9 @@ import android.view.animation.Animation;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
 
 import co.fabrk.popmovies.jobs.EndpointService;
@@ -173,26 +175,39 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
 //        });
     }
 
-    @OnItemClick(R.id.gridview_movies)
-    public void onGridItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-        view.setTransitionName(getString(R.string.transition_thumbnail));
+    @ItemClick(R.id.gridview_movies)
+    public void onGridItemClick(int position) {
+//            Cursor cursor){
+//        AdapterView<?> parent, View } view, int position, long id) {
+
+        //Getting the view
+        View clickedView;
+        int firstPosition = discoverGridView.getFirstVisiblePosition();
+        int lastPosition = discoverGridView.getLastVisiblePosition();
+        if ((position < firstPosition) || (position > lastPosition))
+            clickedView = null;
+        clickedView = discoverGridView.getChildAt(position - firstPosition);
+
+        Cursor cursor = (Cursor) discoverGridView.getItemAtPosition(position);
+        // TODO: 08/04/16 Refactore setTransition using animation builder
+//        Ref:  https://github.com/kaichunlin/android-transition
+//        view.setTransitionName(getString(R.string.transition_thumbnail));
         TMDBMovie movie = new TMDBMovie(cursor);
         if (cursor != null) {
             ((Callback) getActivity())
-                    .onItemSelected(movie, view);
+                    .onItemSelected(movie, clickedView);
         }
         mPosition = position;
     }
     // Synch button
-    @OnClick(R.id.fab_sync)
+    @Click(R.id.fab_sync)
     public void onClickSync(View view) {
         updateMovie();
         Snackbar.make(view, "Resynch launched", Snackbar.LENGTH_LONG)
                 .show();
     }
     // Anim Button
-   @OnClick(R.id.fab_anim)
+   @Click(R.id.fab_anim)
    public void onClickAnim(View view) {
        animSplash();
    }
