@@ -189,9 +189,10 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
         clickedView = discoverGridView.getChildAt(position - firstPosition);
 
         Cursor cursor = (Cursor) discoverGridView.getItemAtPosition(position);
+
         // TODO: 08/04/16 Refactore setTransition using animation builder
 //        Ref:  https://github.com/kaichunlin/android-transition
-//        view.setTransitionName(getString(R.string.transition_thumbnail));
+        clickedView.setTransitionName(getString(R.string.transition_thumbnail));
         TMDBMovie movie = new TMDBMovie(cursor);
         if (cursor != null) {
             ((Callback) getActivity())

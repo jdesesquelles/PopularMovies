@@ -36,6 +36,12 @@ import android.widget.TextView;
 import android.support.v4.app.SharedElementCallback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,7 +56,7 @@ import co.fabrk.popmovies.tmdb.TmdbProviderUtils;
 import co.fabrk.popmovies.ui.utils.ColorUtils;
 import co.fabrk.popmovies.ui.utils.DateUtils;
 import co.fabrk.popmovies.ui.widget.ParallaxScrimageView;
-
+@EFragment(R.layout.detail_fragment)
 public class ViewItemFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private TMDBMovie mMovie;
@@ -72,51 +78,51 @@ public class ViewItemFragment extends Fragment implements LoaderManager.LoaderCa
     private ReviewCursorAdapter mReviewAdapter;
     private TrailerCursorAdapter mTrailerAdapter;
 
-    @Bind(R.id.movie_detail_container)
+    @ViewById(R.id.movie_detail_container)
     ViewGroup parentViewGroup;
     //        LinearLayout movieDetaillinearLayout;
-    @Bind(R.id.layout_detail_information)
+    @ViewById(R.id.layout_detail_information)
     LinearLayout detailInformationlinearLayout;
-    @Bind(R.id.container)
+    @ViewById(R.id.container)
     LinearLayout popupLayout;
-    @Bind(R.id.shot)
+    @ViewById(R.id.shot)
     ParallaxScrimageView imageView;
-    @Bind(R.id.detail_scrollview)
+    @ViewById(R.id.detail_scrollview)
     ScrollView detailScrollView;
-    @Bind(R.id.rating_bar)
+    @ViewById(R.id.rating_bar)
     FrameLayout ratingBarLayout;
     View rootView;
-    @Bind(R.id.textview_title)
+    @ViewById(R.id.textview_title)
     TextView titleView;
-    @Bind(R.id.imageview_poster_detail_fragment)
+    @ViewById(R.id.imageview_poster_detail_fragment)
     ImageView posterView;
-    @Bind(R.id.backdrop)
+    @ViewById(R.id.backdrop)
     ImageView backdropView;
-    @Bind(R.id.textview_release_date)
+    @ViewById(R.id.textview_release_date)
     TextView dateView;
-    @Bind(R.id.textview_rating)
+    @ViewById(R.id.textview_rating)
     TextView ratingView;
-    @Bind(R.id.textview_overview)
+    @ViewById(R.id.textview_overview)
     TextView overviewView;
-    @Bind(R.id.detail_trailer_recycler_view)
+    @ViewById(R.id.detail_trailer_recycler_view)
     RecyclerView trailerList;
-    @Bind(R.id.detail_review_recycler_view)
+    @ViewById(R.id.detail_review_recycler_view)
     RecyclerView reviewList;
-    @Bind(R.id.fab_favorite)
+    @ViewById(R.id.fab_favorite)
     FloatingActionButton fabFavorite;
-    @Bind(R.id.separator_reviews)
+    @ViewById(R.id.separator_reviews)
     View separatorReviews;
-    @Bind(R.id.separator_trailers)
+    @ViewById(R.id.separator_trailers)
     View separatorTrailers;
-    @Bind(R.id.detail_review_textview_title)
+    @ViewById(R.id.detail_review_textview_title)
     TextView reviewsTitleTextview;
-    @Bind(R.id.detail_trailer_textview_title)
+    @ViewById(R.id.detail_trailer_textview_title)
     TextView trailersTitleTextview;
-    @Bind(R.id.splash_screen_detail_view)
+    @ViewById(R.id.splash_screen_detail_view)
     ImageView splashScreenDetailView;
-    @Bind(R.id.include_detail_section_trailers)
+    @ViewById(R.id.include_detail_section_trailers)
     View includeDetailSectionTrailers;
-    @Bind(R.id.include_detail_section_reviews)
+    @ViewById(R.id.include_detail_section_reviews)
     View includeDetailSectionReviews;
 
 
@@ -149,53 +155,71 @@ public class ViewItemFragment extends Fragment implements LoaderManager.LoaderCa
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+////        View view;
+////        rootView = inflater.inflate(R.layout.detail_fragment, container, false);
+////        ButterKnife.bind(this, rootView);
+//        if (mMovie != null) {
+////        setExitSharedElementCallback(fabLoginSharedElementCallback);
+//            showMovieDetail(mMovie);
+////            setListeners();
+//        } else {
+//            showEmptyScreen(); //splashScreenDetailView
+//        }
+//        return rootView;
+//    }
 
-        View view;
-        rootView = inflater.inflate(R.layout.detail_fragment, container, false);
-        ButterKnife.bind(this, rootView);
-        Bundle arguments = getArguments();
+    @AfterViews
+    public void afterViews() {
         if (mMovie != null) {
-//        setExitSharedElementCallback(fabLoginSharedElementCallback);
             showMovieDetail(mMovie);
+            // TODO: 08/04/16 delete
 //            setListeners();
         } else {
             showEmptyScreen(); //splashScreenDetailView
         }
-        return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (mMovie != null) {
-            setListeners();
+            // TODO: 08/04/16 delete
+//            setListeners();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        unsetListeners();
+        //todo Check annotation unregister listeners
+//        unsetListeners();
     }
 
-    // Listeners
-    private void setListeners() {
-        fabFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleFavorite(fabFavorite);
-            }
-        });
+//    // Listeners
+//    private void setListeners() {
+//        fabFavorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                toggleFavorite(fabFavorite);
+//            }
+//        });
+//
+//    }
 
+    @Click(R.id.fab_favorite)
+    public void onClickFavorite() {
+        toggleFavorite(fabFavorite);
     }
 
-    private void unsetListeners() {
-        fabFavorite.setOnClickListener(null);
-
-    }
+    //// TODO: 08/04/16 delete
+//    private void unsetListeners() {
+//        fabFavorite.setOnClickListener(null);
+//
+//    }
 
     public void toggleFavorite(FloatingActionButton fb) {
         if (TmdbProviderUtils.isFavoriteMovie(mMovie, getContext())) {
