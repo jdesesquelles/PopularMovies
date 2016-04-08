@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EndpointService {
 
     private EndPointInterface mService;
-    String BASE_URL = "https://www.googleapis.com/";
+    String BASE_URL = "http://api.themoviedb.org/";
 
 
     @AfterInject

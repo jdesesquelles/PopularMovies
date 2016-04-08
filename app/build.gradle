@@ -106,6 +106,14 @@ configurations.all {
     resolutionStrategy.force "com.android.support:support-annotations:$rootProject.ext.supportAnnotationsVersion"
 }
 
+apt {
+    arguments {
+//        androidManifestFile variant.outputs[0].processResources.manifestFile
+        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+        resourcePackageName android.defaultConfig.applicationId
+    }
+}
+
 
 
 

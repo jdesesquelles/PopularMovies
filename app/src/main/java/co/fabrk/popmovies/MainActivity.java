@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.movie.MovieActivity;
 import co.fabrk.popmovies.movie.MovieFragment;
 import co.fabrk.popmovies.discover.DiscoverFragment;
 import co.fabrk.popmovies.tmdb.TMDBMovie;
-
+@EActivity(R.layout.main_activity)
 public class MainActivity extends AppCompatActivity implements DiscoverFragment.Callback {
     private static final String TAG = "MainActivity";
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
@@ -43,12 +46,11 @@ public class MainActivity extends AppCompatActivity implements DiscoverFragment.
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Lazy init, the favorite array list object is created when adding a new movie
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+//        setContentView(R.layout.main_activity);
         getWindow().setBackgroundDrawable(null);
 
         if (findViewById(R.id.movie_detail_container) != null) {
@@ -67,6 +69,28 @@ public class MainActivity extends AppCompatActivity implements DiscoverFragment.
             mTwoPane = false;
         }
     }
+
+//    @AfterViews
+//    void afterViews() {
+//            getWindow().setBackgroundDrawable(null);
+//
+//            if (findViewById(R.id.movie_detail_container) != null) {
+//                MovieFragment detailFragment = new MovieFragment();
+//                mTwoPane = true;
+//                if (getsavedInstanceState == null) {
+//                    Bundle args = new Bundle();
+//                    args.putParcelable(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME, getIntent().getParcelableExtra(TmdbConstants.TMDB_MOVIE_PARCELABLE_NAME));
+//                    MovieFragment fragment = new MovieFragment();
+//                    fragment.setArguments(args);
+//                    getSupportFragmentManager().beginTransaction()
+//                            .add(R.id.movie_detail_container, fragment)
+//                            .commit();
+//                }
+//            } else {
+//                mTwoPane = false;
+//            }
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

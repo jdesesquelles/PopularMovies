@@ -24,6 +24,16 @@ import android.widget.LinearLayout;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
+
+import co.fabrk.popmovies.jobs.EndPointInterface;
+import co.fabrk.popmovies.jobs.EndpointService;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
 import co.fabrk.popmovies.jobs.FetchTmdbMovies;
 import co.fabrk.popmovies.R;
@@ -32,11 +42,19 @@ import co.fabrk.popmovies.tmdb.TMDBMovie;
 import co.fabrk.popmovies.BuildConfig;
 //import co.fabrk.popmovies.Injection;
 import butterknife.Bind;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import co.fabrk.popmovies.model.TmdbResponse;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
-
+@EFragment(R.layout.main_fragment)
 public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     View mRootView;
@@ -46,26 +64,29 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     private String currentPositionParcelableName = "currentPosition";
     private String sortOption = TmdbConstants.SORT_VALUE_POPULAR;
 
+    @Bean
+    EndpointService mService;
+
     //Todo: implement view holder
-    @Bind(R.id.splash_screen_view)
+    @ViewById(R.id.splash_screen_view)
     ImageView splashScreenImageView;
 
-    @Bind(R.id.main_tab_layout)
+    @ViewById(R.id.main_tab_layout)
     TabLayout tabLayout;
 
-    @Bind(R.id.gridview_movies)
+    @ViewById(R.id.gridview_movies)
     GridView discoverGridView;
 
-    @Bind(R.id.empty_image_view)
+    @ViewById(R.id.empty_image_view)
     ImageView emptyView;
 
-    @Bind(R.id.main_layout)
+    @ViewById(R.id.main_layout)
     LinearLayout mainLayout;
 
-    @Bind(R.id.fab_anim)
+    @ViewById(R.id.fab_anim)
     FloatingActionButton fabAnim;
 
-    @Bind(R.id.fab_sync)
+    @ViewById(R.id.fab_sync)
     FloatingActionButton fabSync;
 
     // Adapter
@@ -79,7 +100,8 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     // State variable - @save session
     private int mPosition = GridView.INVALID_POSITION;
 
-    private void updateMovie() {
+    @AfterInject
+    void updateMovie() {
         // TODO: 05/04/16
         //Most popular
 //        FetchTmdbMovies movieTaskPopular = new FetchTmdbMovies(getActivity().getContentResolver());
@@ -88,10 +110,18 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
 //        FetchTmdbMovies movieTaskHighestRated = new FetchTmdbMovies(getActivity().getContentResolver());
 //        movieTaskHighestRated.execute(TmdbConstants.HIGHEST_RATED);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(TmdbConstants.MOVIE_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Call<TmdbResponse> repos = mService.getService().getPopularMovies(TmdbConstants.SORT_VALUE_POPULARITY_DESC, "c64622d4a2d5472d291b5ec260732c37");
+//        TmdbConstants.API_KEY_VALUE);
+        repos.enqueue(new retrofit2.Callback<TmdbResponse>() {
+            @Override
+            public void onResponse(Call<TmdbResponse> call, Response<TmdbResponse> response) {
+                Log.e("jerem", "onResponse: page 1 ok" + response.body().getResults().get(0).getTitle() );
+            }
+            @Override
+            public void onFailure(Call<TmdbResponse> call, Throwable t) {
+                Log.e("jerem", "Retrofit onFailure: " + call.request().toString());
+            }
+        });
     }
 
     //****************************************************************************//
@@ -99,7 +129,6 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
     //****************************************************************************//
 
     private void setViews(View rootView) {
-
         // Initliazing tabs
         tabLayout.addTab(tabLayout.newTab().setText(TmdbConstants.SORT_VALUE_POPULAR).setIcon(R.drawable.ic_whatshot_black));
         tabLayout.addTab(tabLayout.newTab().setText(TmdbConstants.SORT_VALUE_HIGHEST_RATED).setIcon(R.drawable.ic_star_black));
@@ -126,41 +155,60 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
             }
         });
 
-        discoverGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-                view.setTransitionName(getString(R.string.transition_thumbnail));
-                TMDBMovie movie = new TMDBMovie(cursor);
-                if (cursor != null) {
-                    ((Callback) getActivity())
-                            .onItemSelected(movie, view);
-                }
-                mPosition = position;
-            }
-        });
-
-
+//        discoverGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+//                view.setTransitionName(getString(R.string.transition_thumbnail));
+//                TMDBMovie movie = new TMDBMovie(cursor);
+//                if (cursor != null) {
+//                    ((Callback) getActivity())
+//                            .onItemSelected(movie, view);
+//                }
+//                mPosition = position;
+//            }
+//        });
         //FAB
-        fabSync.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateMovie();
-                Snackbar.make(view, "Resynch launched", Snackbar.LENGTH_LONG)
-                        .show();
-            }
-        });
-
-        fabAnim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animSplash();
-
-            }
-        });
-
-
+//        fabSync.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                updateMovie();
+//                Snackbar.make(view, "Resynch launched", Snackbar.LENGTH_LONG)
+//                        .show();
+//            }
+//        });
+//        fabAnim.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                animSplash();
+//
+//            }
+//        });
     }
+
+    @OnItemClick(R.id.gridview_movies)
+    public void onGridItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+        view.setTransitionName(getString(R.string.transition_thumbnail));
+        TMDBMovie movie = new TMDBMovie(cursor);
+        if (cursor != null) {
+            ((Callback) getActivity())
+                    .onItemSelected(movie, view);
+        }
+        mPosition = position;
+    }
+    // Synch button
+    @OnClick(R.id.fab_sync)
+    public void onClickSync(View view) {
+        updateMovie();
+        Snackbar.make(view, "Resynch launched", Snackbar.LENGTH_LONG)
+                .show();
+    }
+    // Anim Button
+   @OnClick(R.id.fab_anim)
+   public void onClickAnim(View view) {
+       animSplash();
+   }
 
 // Unregistering the listeners
     private void unsetListeners() {
@@ -221,21 +269,31 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         unsetListeners();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    @AfterViews
+    void afterViews() {
         mMovieAdapter = new MovieCursorAdapter(getActivity(), null, 0);
-        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
-        ButterKnife.bind(this, rootView);
-        setViews(rootView);
+        setViews(getView());
         // Start Animation
         showSplash();
         animSplash();
-//        showMovieGrid();
-//        setListeners();
-        return rootView;
+
     }
+
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+//        mMovieAdapter = new MovieCursorAdapter(getActivity(), null, 0);
+//        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+//        ButterKnife.bind(this, rootView);
+//        setViews(rootView);
+//        // Start Animation
+//        showSplash();
+//        animSplash();
+////        showMovieGrid();
+////        setListeners();
+//        return rootView;
+//    }
 
 
     @Override
@@ -339,7 +397,8 @@ public class DiscoverFragment extends Fragment implements LoaderManager.LoaderCa
         if (cursor.getCount() == 0) {
             Snackbar.make(getView(), "No item founds", Snackbar.LENGTH_LONG)
                     .setAction("Check server", null).show();
-            updateMovie();
+// TODO: 07/04/16 uncomment
+//            updateMovie();
 
         }
         mMovieAdapter.swapCursor(cursor);
