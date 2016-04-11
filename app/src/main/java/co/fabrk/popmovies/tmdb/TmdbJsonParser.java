@@ -8,11 +8,33 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import co.fabrk.popmovies.model.TmdbResponse;
+
 
 /**
  * Created by ebal on 02/12/15.
  */
-class TmdbJsonParser {
+public class TmdbJsonParser {
+
+    public static ArrayList<TMDBMovie> getMovieListFromTmdbResponse(TmdbResponse response) {
+        TMDBMovie movie;
+        ArrayList<TMDBMovie> movieArrayList = new ArrayList<>();
+        String[] movieInfo = new String[8];
+        int length = response.getResults().size();
+        for (int i = 0; i < length; i++) {
+            movieInfo[0] = new Integer(response.getResults().get(i).getId()).toString();
+            movieInfo[1] = response.getResults().get(i).getTitle();
+            movieInfo[2] = response.getResults().get(i).getPosterPath();
+            movieInfo[3] = response.getResults().get(i).getReleaseDate();
+            movieInfo[4] = new Double(response.getResults().get(i).getVoteAverage()).toString();
+            movieInfo[5] = response.getResults().get(i).getOverview();
+            movieInfo[6] = new Double(response.getResults().get(i).getPopularity()).toString();
+            movieInfo[7] = response.getResults().get(i).getBackdropPath();
+            movie = new TMDBMovie(movieInfo);
+            movieArrayList.add(movie);
+        }
+        return movieArrayList;
+    }
 
     public static ArrayList<TMDBMovie> getMovieListFromTmdbJson(String movieJsonStr) throws JSONException {
         // Field names in JSON
