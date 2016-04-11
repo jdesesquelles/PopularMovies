@@ -29,6 +29,9 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import co.fabrk.popmovies.jobs.EndpointService;
 import co.fabrk.popmovies.tmdb.TmdbConstants;
@@ -39,6 +42,8 @@ import co.fabrk.popmovies.tmdb.TMDBMovie;
 //import co.fabrk.popmovies.Injection;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import co.fabrk.popmovies.tmdb.TmdbDatabaseOperations;
+import co.fabrk.popmovies.tmdb.TmdbJsonParser;
 import retrofit2.Call;
 import retrofit2.Response;
 import co.fabrk.popmovies.model.TmdbResponse;
@@ -105,6 +110,14 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public void onResponse(Call<TmdbResponse> call, Response<TmdbResponse> response) {
                 Log.e("jerem", "onResponse: page 1 ok" + response.body().getResults().get(0).getTitle() );
+                Log.e("jerem", "onResponse: Tmdb Json toString" + response.body().toString() );
+
+                ArrayList<TMDBMovie> movieArrayList = new ArrayList<>();
+                movieArrayList = TmdbJsonParser.getMovieListFromTmdbResponse(response.body());
+                if (movieArrayList != null) {
+                    TmdbDatabaseOperations.addBulkMovies(movieArrayList, getContext().getContentResolver());
+                    TmdbDatabaseOperations.addPopularList(movieArrayList, getContext().getContentResolver());
+                }
             }
             @Override
             public void onFailure(Call<TmdbResponse> call, Throwable t) {
@@ -126,6 +139,11 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
         discoverGridView.setAdapter(mMovieAdapter);
     }
 
+    @Click(R.id.main_tab_layout)
+    void onTabSelected()
+    {
+        startLoader(tabLayout.getSelectedTabPosition());
+    }
     // Setting the listeners
     private void setListeners() {
 
@@ -200,13 +218,15 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
         }
         mPosition = position;
     }
-    // Synch button
+
+    // Sync button
     @Click(R.id.fab_sync)
     public void onClickSync(View view) {
         updateMovie();
         Snackbar.make(view, "Resynch launched", Snackbar.LENGTH_LONG)
                 .show();
     }
+
     // Anim Button
    @Click(R.id.fab_anim)
    public void onClickAnim(View view) {
@@ -259,7 +279,7 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onResume() {
         super.onResume();
-        setListeners();
+//        setListeners();
 //        Log.e(TAG, "onResume: ");
 //        if (sortOption.equals("favorite")) {
 //            updateMovie();
@@ -269,7 +289,7 @@ public class BrowseCatalog extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onPause() {
         super.onPause();
-        unsetListeners();
+//        unsetListeners();
     }
 
     @AfterViews
